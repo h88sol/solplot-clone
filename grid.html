@@ -2,10 +2,10 @@
 <html lang="en" class="min-h-full" style="background-color:#F7F1E8;">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" href="logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SketchBounties — Sketch Bounties</title>
-  <meta name="description" content="The agent posts a build brief on a plot. You only get a glimpse — sketch the rest. Best drawing wins the SOL bounty and gets built on the plot." />
+  <meta name="description" content="A fresh build brief drops on each plot. You only get a glimpse — sketch the rest. Best drawing wins the SOL bounty and gets built on the plot." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="sketch.js"></script>
@@ -95,7 +95,7 @@
     <div class="mx-auto max-w-[1280px] flex items-center justify-between rounded-2xl border border-white/60 bg-white/40 px-4 py-2.5 backdrop-blur-2xl"
          style="box-shadow:0 4px 30px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.6);">
       <a href="index.html" class="inline-flex items-center gap-2">
-        <img src="favicon.svg" class="h-[26px] w-[26px] object-contain" alt="" />
+        <img src="logo.png" class="h-[26px] w-[26px] object-contain" alt="" />
         <span class="brand font-bold tracking-tight text-[#1c1917] text-lg">SketchBounties</span>
         <span class="ml-1.5 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[10px] font-semibold text-amber-700">Draw-to-earn</span>
       </a>
@@ -147,7 +147,7 @@
   </main>
 
   <footer class="border-t border-stone-900/[0.05] py-8 text-center text-xs text-stone-400">
-    SketchBounties · AI virtual real estate · sketch the brief, best drawing wins SOL · saved on your device for this demo
+    SketchBounties · on-chain virtual real estate · sketch the brief, best drawing wins SOL · saved on your device for this demo
   </footer>
 
   <!-- ============ BOUNTY / STUDIO MODAL ============ -->
@@ -477,7 +477,7 @@
     document.getElementById('detail-name').textContent=`${b.name} · ${b.style}`;
     document.getElementById('detail-reward').textContent=b.reward+' SOL';
     document.getElementById('detail-coord').textContent=`Plot (${x}, ${y})`;
-    document.getElementById('detail-winner').innerHTML=`Winning sketch by <b>${b.winnerArtist}</b>${b.winnerOwner?' 🎉 (you!)':''} — the agent built it on this plot.`;
+    document.getElementById('detail-winner').innerHTML=`Winning sketch by <b>${b.winnerArtist}</b>${b.winnerOwner?' 🎉 (you!)':''} — built on this plot.`;
     document.getElementById('detail-votes').textContent=`${b.winnerVotes} votes · bounty #${b.id} paid out in SOL`;
     const d=document.getElementById('detail'); d.classList.remove('hidden'); d.classList.add('flex');
     lucide.createIcons();
