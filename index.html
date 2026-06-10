@@ -455,7 +455,7 @@
           </div>
           <div class="bg-white px-5 py-6 text-center">
             <div class="font-display text-2xl font-bold text-amber-700 md:text-3xl" id="stat-buildings">0</div>
-            <div class="mt-1 text-xs font-medium text-slate-500">Sketches built</div>
+            <div class="mt-1 text-xs font-medium text-slate-500">Sketches in</div>
           </div>
           <div class="bg-white px-5 py-6 text-center">
             <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl">SOL</div>
@@ -582,7 +582,7 @@
                 <span class="font-mono text-sm font-semibold text-amber-600" id="bento-stat-claimed">...</span>
               </div>
               <div class="flex items-center justify-between rounded-xl border border-amber-100 bg-white px-3.5 py-2.5">
-                <span class="text-xs text-slate-500">Sketches built</span>
+                <span class="text-xs text-slate-500">Sketches in</span>
                 <span class="font-mono text-sm font-semibold text-amber-700" id="bento-stat-buildings">...</span>
               </div>
               <div class="flex items-center gap-2 pt-0.5 px-0.5">
@@ -1109,7 +1109,7 @@
     })();
 
     // Landing stats — read from the same local bounty board the grid writes
-    const BOUNTY_KEY = 'sketchplot_bounties_v2';
+    const BOUNTY_KEY = 'sketchplot_bounties_v1';
     function loadLandingStats() {
       try {
         let store = {};
@@ -1117,14 +1117,14 @@
         const all = Object.entries(store).filter(([k]) => k !== '__seq').map(([, b]) => b);
         const posted = all.length;
         const open = all.filter(b => b.status === 'open').length;
-        const built = all.filter(b => b.status === 'built').length;
+        const subs = all.reduce((n, b) => n + (b.subs ? b.subs.length : 0), 0);
         const setTxt = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
         setTxt('bento-stat-claimed', open.toLocaleString());
-        setTxt('bento-stat-buildings', built.toLocaleString());
+        setTxt('bento-stat-buildings', subs.toLocaleString());
         const miniGridStat = document.getElementById('mini-grid-stat');
         if (miniGridStat) miniGridStat.textContent = open.toLocaleString() + ' open';
         setTxt('stat-claimed', posted.toLocaleString());
-        setTxt('stat-buildings', built.toLocaleString());
+        setTxt('stat-buildings', subs.toLocaleString());
       } catch (_) {}
     }
     loadLandingStats();

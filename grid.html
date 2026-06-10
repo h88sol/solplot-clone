@@ -123,9 +123,7 @@
         <span class="text-xs text-stone-400">· 100×100 · 10,000 plots</span>
       </div>
       <div class="flex items-center gap-4 rounded-xl border border-amber-200/60 bg-white px-4 py-2.5 shadow-sm text-sm">
-        <span class="text-stone-500">Open <b id="stat-open" class="font-mono text-amber-600">0</b></span>
-        <span class="text-stone-500">Built <b id="stat-built" class="font-mono text-stone-700">0</b></span>
-        <span class="text-stone-500">Your wins <b id="stat-wins" class="font-mono text-emerald-600">0</b></span>
+        <span class="text-stone-500">Open bounties <b id="stat-open" class="font-mono text-amber-600">0</b></span>
       </div>
       <button onclick="newBountyRandom()" class="inline-flex items-center gap-1.5 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-700 hover:bg-amber-100 transition">
         <i data-lucide="dice-5" class="h-4 w-4"></i> Random open bounty
@@ -137,7 +135,7 @@
       </div>
     </div>
 
-    <p id="intro" class="mb-3 text-sm text-stone-500">Click an <b class="text-amber-600">empty tile</b> to open a fresh build bounty — you get a quick <b>glimpse</b> of the building, then sketch the rest. Click an <b class="text-amber-600">amber tile</b> for its live bounty. Click a <b class="text-stone-700">built tile</b> to see the winning sketch.</p>
+    <p id="intro" class="mb-3 text-sm text-stone-500">Click an <b class="text-amber-600">empty tile</b> to open a fresh build bounty — you get a quick <b>glimpse</b> of the building, then sketch the rest (on screen or on paper). Click an <b class="text-amber-600">amber tile</b> to enter its live bounty.</p>
 
     <!-- grid -->
     <div id="grid-scroll" style="height:min(70vh,720px)">
@@ -148,8 +146,6 @@
     <div id="legend" class="mt-4 flex flex-wrap items-center gap-5 text-xs text-stone-500">
       <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fffdf8;border:1px solid #ddccab"></i> Empty plot</span>
       <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fff3df;box-shadow:inset 0 0 0 1px rgba(234,115,23,.6)"></i> Open bounty</span>
-      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fffdf8;box-shadow:inset 0 0 0 1px rgba(120,113,108,.6)"></i> Winning sketch</span>
-      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="outline:2px solid #22c55e;outline-offset:-1px;background:#FBEAD7"></i> Your win</span>
     </div>
   </main>
 
@@ -350,8 +346,6 @@
   function refreshStats(){
     const all=bounties().map(([,b])=>b);
     document.getElementById('stat-open').textContent = all.filter(b=>b.status==='open').length;
-    document.getElementById('stat-built').textContent = all.filter(b=>b.status==='built').length;
-    document.getElementById('stat-wins').textContent = owner ? all.filter(b=>b.winnerOwner===owner).length : 0;
   }
 
   gridEl.addEventListener('click', e=>{
@@ -522,6 +516,19 @@
 
   /* ───────────────── boot ───────────────── */
   if(window.self!==window.top) document.body.classList.add('embed');
+  // crowning was removed — clear any previously-crowned/built tiles back to open bounties
+  (function cleanupBuilt(){
+    let dirty=false;
+    for(const [,b] of bounties()){
+      if(b.status && b.status!=='open'){
+        b.status='open';
+        delete b.builtImg; delete b.winner; delete b.winnerArtist;
+        delete b.winnerSketch; delete b.winnerVotes; delete b.winnerOwner;
+        dirty=true;
+      }
+    }
+    if(dirty) saveStore();
+  })();
   window.addEventListener('storage', e=>{ if(e.key===STORE_KEY){ store=loadStore(); seq=store.__seq||seq; buildGrid(); refreshStats(); }});
   seedBoard();
   buildGrid();
