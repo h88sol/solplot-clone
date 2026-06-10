@@ -104,10 +104,7 @@
           <i data-lucide="arrow-left" class="h-4 w-4"></i> Home
         </a>
         <a href="https://x.com/sketchbounties" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-amber-200 bg-white text-stone-700 hover:bg-amber-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <button id="connect-btn" onclick="connectPhantom()" class="accent-cta h-[38px] min-w-[150px] px-4 text-[15px] font-medium">
-          <img src="https://cdn.brandfetch.io/idf5VaJxyT/theme/light/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" class="h-[18px] w-[18px] brightness-0 invert" alt="" />
-          <span id="connect-text">Connect Phantom</span>
-        </button>
+        <button onclick="window.open('https://pump.fun/coin/CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump','_blank')" class="accent-cta h-[38px] px-4 text-[15px] font-medium">Buy $SKETCH</button>
       </div>
     </div>
   </header>
@@ -491,17 +488,6 @@
   let toastTimer;
   function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
     clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2600); }
-
-  /* ───────────────── Phantom ───────────────── */
-  async function connectPhantom(){
-    const ph=window.phantom?.solana ?? window.solana;
-    if(!ph?.isPhantom){ window.open('https://phantom.app/','_blank'); return; }
-    try{ const resp=await ph.connect(); const a=resp.publicKey.toString();
-      owner=a.slice(0,4)+'...'+a.slice(-4); document.getElementById('connect-text').textContent=owner;
-      buildGrid(); refreshStats(); toast('Wallet connected · wins tag to '+owner);
-    }catch{}
-  }
-  (async()=>{ try{ const ph=window.phantom?.solana??window.solana; if(ph?.isConnected&&ph.publicKey){ const a=ph.publicKey.toString(); owner=a.slice(0,4)+'...'+a.slice(-4); document.getElementById('connect-text').textContent=owner; } }catch{} })();
 
   /* ───────────────── seed a living board on first load ───────────────── */
   function seedBoard(){
