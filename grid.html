@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="min-h-full" style="background-color:#F0F6FE;">
+<html lang="en" class="min-h-full" style="background-color:#F7F1E8;">
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USDC PLOT — Sketch Bounties</title>
-  <meta name="description" content="The agent posts a build brief on a plot. Sketch the building it wants — the best drawing wins the bounty and gets built on the plot." />
+  <title>SKETCHPLOT — Sketch Bounties</title>
+  <meta name="description" content="The agent posts a build brief on a plot. You only get a glimpse — sketch the rest. Best drawing wins the SOL bounty and gets built on the plot." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,48 +14,48 @@
   <style>
     h1,h2,h3,.brand{font-family:'Space Grotesk','Inter',system-ui,sans-serif}
     :root{
-      --usdc:#2775CA; --usdc-2:#6BA9E6; --usdc-50:#E3EFFB;
-      --bg:#EEF4FD; --ink:#0f172a; --amber:#f59e0b;
+      --accent:#EA7317; --accent-2:#F59E0B; --accent-50:#FBEAD7;
+      --bg:#F4ECDF; --ink:#1c1917;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{background:#F0F6FE;color-scheme:light}
+    html{background:#F7F1E8;color-scheme:light}
     body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
 
     /* ----- GRID ----- */
     #grid-scroll{
-      overflow:auto; border-radius:16px; background:#cbdcef;
-      border:1px solid rgba(39,117,202,.28);
-      box-shadow:0 10px 40px rgba(10,52,100,.10);
-      scrollbar-width:thin; scrollbar-color:rgba(39,117,202,.35) transparent;
+      overflow:auto; border-radius:16px; background:#e7dac2;
+      border:1px solid rgba(234,115,23,.28);
+      box-shadow:0 10px 40px rgba(120,70,20,.10);
+      scrollbar-width:thin; scrollbar-color:rgba(234,115,23,.35) transparent;
     }
     #grid{
       display:grid;
       grid-template-columns:repeat(var(--cols),var(--tile));
       grid-auto-rows:var(--tile);
-      gap:1px; background:#bcd2e9;
+      gap:1px; background:#ddccab;
       width:max-content;
     }
     .tile{
       width:var(--tile); height:var(--tile);
-      background:#ffffff; border:0; padding:0; cursor:pointer;
+      background:#fffdf8; border:0; padding:0; cursor:pointer;
       background-size:cover; background-position:center;
       transition:outline .08s, background-color .1s;
       position:relative;
     }
-    .tile:hover{outline:2px solid var(--usdc);outline-offset:-1px;z-index:3;background-color:#e6f0fb}
-    .tile.bounty{background-color:#fff7e6;box-shadow:inset 0 0 0 1px rgba(245,158,11,.55)}
-    .tile.bounty::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, rgba(245,158,11,.0) 35%, rgba(245,158,11,.22) 100%)}
-    .tile.built{background-color:#ffffff;box-shadow:inset 0 0 0 1px rgba(39,117,202,.45)}
+    .tile:hover{outline:2px solid var(--accent);outline-offset:-1px;z-index:3;background-color:#f6ecdc}
+    .tile.bounty{background-color:#fff3df;box-shadow:inset 0 0 0 1px rgba(234,115,23,.55)}
+    .tile.bounty::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, rgba(234,115,23,0) 35%, rgba(234,115,23,.22) 100%)}
+    .tile.built{background-color:#fffdf8;box-shadow:inset 0 0 0 1px rgba(120,113,108,.5)}
     .tile.mywin{outline:2px solid #22c55e;outline-offset:-1px;z-index:2}
 
-    .purple-cta{
+    .accent-cta{
       display:inline-flex;align-items:center;justify-content:center;gap:.5rem;cursor:pointer;
       border-radius:.6rem;border:1px solid rgba(255,255,255,.25);color:#fff;
-      background:linear-gradient(165deg,rgba(39,117,202,.95),rgba(20,70,130,.96));
-      box-shadow:0 6px 24px rgba(20,70,130,.35),inset 0 1px 0 rgba(255,255,255,.3);
+      background:linear-gradient(165deg,rgba(234,115,23,.97),rgba(180,83,9,.98));
+      box-shadow:0 6px 24px rgba(146,64,14,.35),inset 0 1px 0 rgba(255,255,255,.3);
       transition:filter .15s}
-    .purple-cta:hover{filter:brightness(1.06)}
-    .purple-cta:disabled{opacity:.5;cursor:not-allowed;filter:none}
+    .accent-cta:hover{filter:brightness(1.06)}
+    .accent-cta:disabled{opacity:.5;cursor:not-allowed;filter:none}
 
     @keyframes spin{to{transform:rotate(360deg)}}
     .spin{animation:spin .9s linear infinite}
@@ -71,18 +71,19 @@
     body.embed #grid-wrap{padding:0}
     body.embed #grid-scroll{border:0;box-shadow:none;border-radius:0;height:100vh}
 
-    .modal-backdrop{background:rgba(8,37,64,.42);backdrop-filter:blur(6px)}
+    .modal-backdrop{background:rgba(40,28,16,.42);backdrop-filter:blur(6px)}
 
     /* drawing canvas */
     #draw-wrap{position:relative;width:100%;aspect-ratio:1/1;border-radius:1rem;overflow:hidden;
-      border:1px solid #bcd2e9;background:#fff;touch-action:none}
-    #trace-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;
-      transition:opacity .2s;pointer-events:none;background:#fff}
-    #trace-img.on{opacity:.28}
+      border:1px solid #ddccab;background:#fff;touch-action:none}
     #canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+    /* brief reference: only a small, blurred glimpse is revealed — can't be traced 1:1 */
+    #brief-img{filter:blur(7px) contrast(1.05);transform:scale(1.08);opacity:.92;
+      -webkit-mask-image:radial-gradient(circle at 50% 52%, #000 0, #000 20%, transparent 44%);
+      mask-image:radial-gradient(circle at 50% 52%, #000 0, #000 20%, transparent 44%)}
     .swatch{width:22px;height:22px;border-radius:9999px;border:2px solid #fff;
-      box-shadow:0 0 0 1px rgba(15,23,42,.15);cursor:pointer}
-    .swatch.on{box-shadow:0 0 0 2px var(--usdc)}
+      box-shadow:0 0 0 1px rgba(28,25,23,.18);cursor:pointer}
+    .swatch.on{box-shadow:0 0 0 2px var(--accent)}
     .vote-btn:disabled{opacity:.5;cursor:default}
   </style>
 </head>
@@ -94,15 +95,15 @@
          style="box-shadow:0 4px 30px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.6);">
       <a href="index.html" class="inline-flex items-center gap-2">
         <img src="favicon.svg" class="h-[26px] w-[26px] object-contain" alt="" />
-        <span class="brand font-bold tracking-tight text-[#111] text-lg">USDC PLOT</span>
+        <span class="brand font-bold tracking-tight text-[#1c1917] text-lg">SKETCHPLOT</span>
         <span class="ml-1.5 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[10px] font-semibold text-amber-700">Sketch Bounties</span>
       </a>
       <div class="flex items-center gap-2">
-        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white/70 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-white transition">
+        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white/70 px-3 py-2 text-sm font-medium text-stone-600 hover:bg-white transition">
           <i data-lucide="arrow-left" class="h-4 w-4"></i> Home
         </a>
-        <a href="https://x.com/usdcplot" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-blue-200 bg-white text-slate-700 hover:bg-blue-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <button id="connect-btn" onclick="connectPhantom()" class="purple-cta h-[38px] min-w-[150px] px-4 text-[15px] font-medium">
+        <a href="https://x.com/sketchplot" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-amber-200 bg-white text-stone-700 hover:bg-amber-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <button id="connect-btn" onclick="connectPhantom()" class="accent-cta h-[38px] min-w-[150px] px-4 text-[15px] font-medium">
           <img src="https://cdn.brandfetch.io/idf5VaJxyT/theme/light/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" class="h-[18px] w-[18px] brightness-0 invert" alt="" />
           <span id="connect-text">Connect Phantom</span>
         </button>
@@ -117,25 +118,25 @@
     <div id="toolbar" class="mb-4 flex flex-wrap items-center gap-3">
       <div class="flex items-center gap-2 rounded-xl border border-amber-200/70 bg-white px-4 py-2.5 shadow-sm">
         <span class="h-2 w-2 rounded-full bg-amber-500 animate-pulse"></span>
-        <span class="text-sm font-semibold text-slate-700">Open Bounty Board</span>
-        <span class="text-xs text-slate-400">· 100×100 · 10,000 plots</span>
+        <span class="text-sm font-semibold text-stone-700">Open Bounty Board</span>
+        <span class="text-xs text-stone-400">· 100×100 · 10,000 plots</span>
       </div>
-      <div class="flex items-center gap-4 rounded-xl border border-blue-200/60 bg-white px-4 py-2.5 shadow-sm text-sm">
-        <span class="text-slate-500">Open <b id="stat-open" class="font-mono text-amber-600">0</b></span>
-        <span class="text-slate-500">Built <b id="stat-built" class="font-mono text-blue-700">0</b></span>
-        <span class="text-slate-500">Your wins <b id="stat-wins" class="font-mono text-emerald-600">0</b></span>
+      <div class="flex items-center gap-4 rounded-xl border border-amber-200/60 bg-white px-4 py-2.5 shadow-sm text-sm">
+        <span class="text-stone-500">Open <b id="stat-open" class="font-mono text-amber-600">0</b></span>
+        <span class="text-stone-500">Built <b id="stat-built" class="font-mono text-stone-700">0</b></span>
+        <span class="text-stone-500">Your wins <b id="stat-wins" class="font-mono text-emerald-600">0</b></span>
       </div>
       <button onclick="newBountyRandom()" class="inline-flex items-center gap-1.5 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-700 hover:bg-amber-100 transition">
         <i data-lucide="dice-5" class="h-4 w-4"></i> Random open bounty
       </button>
-      <div class="ml-auto flex items-center gap-2 rounded-xl border border-blue-200/60 bg-white px-4 py-2.5 shadow-sm">
-        <i data-lucide="zoom-out" class="h-4 w-4 text-slate-400"></i>
-        <input id="zoom" type="range" min="10" max="36" value="18" class="w-28 accent-blue-600" />
-        <i data-lucide="zoom-in" class="h-4 w-4 text-slate-400"></i>
+      <div class="ml-auto flex items-center gap-2 rounded-xl border border-amber-200/60 bg-white px-4 py-2.5 shadow-sm">
+        <i data-lucide="zoom-out" class="h-4 w-4 text-stone-400"></i>
+        <input id="zoom" type="range" min="10" max="36" value="18" class="w-28 accent-amber-600" />
+        <i data-lucide="zoom-in" class="h-4 w-4 text-stone-400"></i>
       </div>
     </div>
 
-    <p id="intro" class="mb-3 text-sm text-slate-500">Click an <b class="text-amber-600">empty tile</b> to open a fresh build bounty — the agent generates a blueprint to sketch. Click an <b class="text-amber-600">amber tile</b> to enter its live bounty and draw. Click a <b class="text-blue-700">built tile</b> to see the winning sketch.</p>
+    <p id="intro" class="mb-3 text-sm text-stone-500">Click an <b class="text-amber-600">empty tile</b> to open a fresh build bounty — you get a quick <b>glimpse</b> of the building, then sketch the rest. Click an <b class="text-amber-600">amber tile</b> for its live bounty. Click a <b class="text-stone-700">built tile</b> to see the winning sketch.</p>
 
     <!-- grid -->
     <div id="grid-scroll" style="height:min(70vh,720px)">
@@ -143,37 +144,37 @@
     </div>
 
     <!-- legend -->
-    <div id="legend" class="mt-4 flex flex-wrap items-center gap-5 text-xs text-slate-500">
-      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#ffffff;border:1px solid #bcd2e9"></i> Empty plot</span>
-      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fff7e6;box-shadow:inset 0 0 0 1px rgba(245,158,11,.6)"></i> Open bounty</span>
-      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#ffffff;box-shadow:inset 0 0 0 1px rgba(39,117,202,.5)"></i> Winning sketch</span>
-      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="outline:2px solid #22c55e;outline-offset:-1px;background:#E3EFFB"></i> Your win</span>
+    <div id="legend" class="mt-4 flex flex-wrap items-center gap-5 text-xs text-stone-500">
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fffdf8;border:1px solid #ddccab"></i> Empty plot</span>
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fff3df;box-shadow:inset 0 0 0 1px rgba(234,115,23,.6)"></i> Open bounty</span>
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#fffdf8;box-shadow:inset 0 0 0 1px rgba(120,113,108,.6)"></i> Winning sketch</span>
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="outline:2px solid #22c55e;outline-offset:-1px;background:#FBEAD7"></i> Your win</span>
     </div>
   </main>
 
-  <footer class="border-t border-slate-900/[0.05] py-8 text-center text-xs text-slate-400">
-    USDC PLOT · AI virtual real estate · sketch the brief, best drawing wins the bounty · saved on your device for this demo
+  <footer class="border-t border-stone-900/[0.05] py-8 text-center text-xs text-stone-400">
+    SKETCHPLOT · AI virtual real estate · sketch the brief, best drawing wins SOL · saved on your device for this demo
   </footer>
 
   <!-- ============ BOUNTY / STUDIO MODAL ============ -->
   <div id="modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
     <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
-    <div class="relative w-full max-w-4xl rounded-3xl border border-blue-200 bg-white shadow-2xl overflow-hidden max-h-[94vh] flex flex-col">
+    <div class="relative w-full max-w-4xl rounded-3xl border border-amber-200 bg-white shadow-2xl overflow-hidden max-h-[94vh] flex flex-col">
       <!-- header -->
-      <div class="flex items-center justify-between px-6 py-4 border-b border-blue-100 bg-amber-50/60">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-amber-100 bg-amber-50/60">
         <div class="flex items-center gap-3">
           <span class="grid h-9 w-9 place-items-center rounded-xl bg-amber-100 text-amber-700"><i data-lucide="pen-tool" class="h-5 w-5"></i></span>
           <div>
             <p class="text-[10px] font-bold uppercase tracking-[0.14em] text-amber-500">Build Bounty <span id="modal-id"></span></p>
-            <h2 id="modal-coord" class="text-lg font-bold text-slate-900">Plot (0, 0)</h2>
+            <h2 id="modal-coord" class="text-lg font-bold text-stone-900">Plot (0, 0)</h2>
           </div>
         </div>
         <div class="flex items-center gap-3">
           <div class="text-right">
-            <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">Reward</p>
-            <p id="modal-reward" class="font-display text-base font-bold text-amber-600">0 $USDCPLOT</p>
+            <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-stone-400">Reward</p>
+            <p id="modal-reward" class="font-display text-base font-bold text-amber-600">0 SOL</p>
           </div>
-          <button onclick="closeModal()" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100"><i data-lucide="x" class="h-5 w-5"></i></button>
+          <button onclick="closeModal()" class="rounded-lg p-1.5 text-stone-400 hover:bg-stone-100"><i data-lucide="x" class="h-5 w-5"></i></button>
         </div>
       </div>
 
@@ -181,59 +182,56 @@
         <div class="grid gap-6 md:grid-cols-2">
           <!-- LEFT: the brief -->
           <div>
-            <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">The Brief — sketch this</label>
-            <div class="mt-2 relative aspect-square w-full overflow-hidden rounded-2xl border border-blue-100 bg-white grid place-items-center">
+            <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">The brief — just a glimpse</label>
+            <div class="mt-2 relative aspect-square w-full overflow-hidden rounded-2xl border border-amber-100 bg-white grid place-items-center">
               <div id="brief-loading" class="text-center">
                 <i data-lucide="loader-2" class="mx-auto h-9 w-9 text-amber-500 spin"></i>
-                <p class="mt-2 text-xs text-slate-500">Agent is drafting a blueprint…</p>
+                <p class="mt-2 text-xs text-stone-500">Agent is drafting the brief…</p>
               </div>
-              <img id="brief-img" class="hidden absolute inset-0 h-full w-full object-contain bg-white" alt="Build brief blueprint" />
-              <span class="absolute bottom-2 left-2 rounded-lg bg-slate-900/80 px-2.5 py-1 text-[10px] font-bold text-white">Pencil sketch · trace or freehand</span>
+              <img id="brief-img" class="hidden absolute inset-0 h-full w-full object-contain bg-white" alt="Build brief glimpse" />
+              <span class="absolute bottom-2 left-2 rounded-lg bg-stone-900/80 px-2.5 py-1 text-[10px] font-bold text-white">Only a glimpse · sketch the rest yourself</span>
             </div>
-            <div class="mt-3 rounded-xl border border-blue-100 bg-[#F0F6FE] p-3 text-sm">
-              <p class="text-slate-700"><b id="brief-name">—</b> · <span id="brief-style" class="text-blue-700"></span></p>
-              <p id="brief-desc" class="mt-1 text-xs text-slate-500 leading-relaxed"></p>
+            <div class="mt-3 rounded-xl border border-amber-100 bg-[#FBF6EE] p-3 text-sm">
+              <p class="text-stone-700"><b id="brief-name">—</b> · <span id="brief-style" class="text-amber-700"></span></p>
+              <p id="brief-desc" class="mt-1 text-xs text-stone-500 leading-relaxed"></p>
               <div class="mt-2 flex flex-wrap gap-2 text-[11px]">
-                <span class="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-white px-2 py-0.5 text-slate-600"><i data-lucide="gauge" class="h-3 w-3"></i> <span id="brief-diff">Medium</span></span>
+                <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-stone-600"><i data-lucide="gauge" class="h-3 w-3"></i> <span id="brief-diff">Medium</span></span>
                 <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-amber-700"><i data-lucide="users" class="h-3 w-3"></i> <span id="brief-subs">0</span> submissions</span>
-                <span class="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-white px-2 py-0.5 text-slate-600"><i data-lucide="clock" class="h-3 w-3"></i> live now</span>
+                <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-stone-600"><i data-lucide="clock" class="h-3 w-3"></i> live now</span>
               </div>
             </div>
           </div>
 
           <!-- RIGHT: drawing studio -->
           <div>
-            <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Your sketch</label>
+            <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">Your sketch</label>
             <div id="draw-wrap" class="mt-2">
-              <img id="trace-img" alt="" />
               <canvas id="canvas" width="560" height="560"></canvas>
             </div>
             <!-- tools -->
             <div class="mt-3 flex flex-wrap items-center gap-3">
               <div id="swatches" class="flex items-center gap-1.5"></div>
               <div class="flex items-center gap-1.5">
-                <i data-lucide="minus" class="h-3.5 w-3.5 text-slate-400"></i>
-                <input id="brush" type="range" min="1" max="28" value="4" class="w-20 accent-blue-600" />
-                <i data-lucide="plus" class="h-3.5 w-3.5 text-slate-400"></i>
+                <i data-lucide="minus" class="h-3.5 w-3.5 text-stone-400"></i>
+                <input id="brush" type="range" min="1" max="28" value="4" class="w-20 accent-amber-600" />
+                <i data-lucide="plus" class="h-3.5 w-3.5 text-stone-400"></i>
               </div>
-              <button id="eraser-btn" onclick="toggleEraser()" class="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="eraser" class="h-3.5 w-3.5"></i> Eraser</button>
-              <button onclick="undoDraw()" class="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="undo-2" class="h-3.5 w-3.5"></i> Undo</button>
-              <button onclick="clearDraw()" class="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"><i data-lucide="trash-2" class="h-3.5 w-3.5"></i> Clear</button>
-              <label class="ml-auto inline-flex cursor-pointer items-center gap-1.5 text-xs font-medium text-slate-600">
-                <input id="trace-toggle" type="checkbox" onchange="toggleTrace()" class="accent-amber-500"> Trace sketch
-              </label>
+              <button id="eraser-btn" onclick="toggleEraser()" class="inline-flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"><i data-lucide="eraser" class="h-3.5 w-3.5"></i> Eraser</button>
+              <button onclick="undoDraw()" class="inline-flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"><i data-lucide="undo-2" class="h-3.5 w-3.5"></i> Undo</button>
+              <button onclick="clearDraw()" class="inline-flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"><i data-lucide="trash-2" class="h-3.5 w-3.5"></i> Clear</button>
+              <span class="ml-auto text-[11px] text-stone-400">Or draw it on paper &amp; judge by eye</span>
             </div>
-            <button id="submit-btn" onclick="submitSketch()" class="purple-cta mt-3 w-full px-4 py-2.5 text-sm font-semibold">
+            <button id="submit-btn" onclick="submitSketch()" class="accent-cta mt-3 w-full px-4 py-2.5 text-sm font-semibold">
               <i data-lucide="upload" class="h-4 w-4"></i> Submit my sketch to the bounty
             </button>
-            <p class="mt-1.5 text-center text-[11px] text-slate-400">An on-chain judge scores effort; the community votes. Most votes wins.</p>
+            <p class="mt-1.5 text-center text-[11px] text-stone-400">An on-chain judge scores effort; the community votes. Most votes wins the SOL.</p>
           </div>
         </div>
 
         <!-- LEADERBOARD -->
-        <div class="mt-7 border-t border-blue-100 pt-5">
+        <div class="mt-7 border-t border-amber-100 pt-5">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-900 inline-flex items-center gap-2"><i data-lucide="trophy" class="h-4 w-4 text-amber-500"></i> Submissions &amp; votes</h3>
+            <h3 class="text-sm font-bold text-stone-900 inline-flex items-center gap-2"><i data-lucide="trophy" class="h-4 w-4 text-amber-500"></i> Submissions &amp; votes</h3>
             <button id="crown-btn" onclick="crownWinner()" class="hidden inline-flex items-center gap-1.5 rounded-xl bg-amber-500 px-3.5 py-2 text-xs font-semibold text-white hover:bg-amber-600 transition"><i data-lucide="crown" class="h-3.5 w-3.5"></i> Crown winner &amp; build on plot</button>
           </div>
           <div id="leaderboard" class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
@@ -245,29 +243,29 @@
   <!-- ============ DETAIL (built plot) ============ -->
   <div id="detail" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
     <div class="modal-backdrop absolute inset-0" onclick="closeDetail()"></div>
-    <div class="relative w-full max-w-sm rounded-3xl border border-blue-200 bg-white shadow-2xl overflow-hidden">
-      <div class="aspect-square w-full bg-white border-b border-blue-100"><img id="detail-sketch" class="h-full w-full object-contain bg-white" alt=""/></div>
-      <div class="py-1.5 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-amber-500 border-b border-blue-100 bg-amber-50/50">🏆 Winning sketch · built on the plot</div>
+    <div class="relative w-full max-w-sm rounded-3xl border border-amber-200 bg-white shadow-2xl overflow-hidden">
+      <div class="aspect-square w-full bg-white border-b border-amber-100"><img id="detail-sketch" class="h-full w-full object-contain bg-white" alt=""/></div>
+      <div class="py-1.5 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-amber-500 border-b border-amber-100 bg-amber-50/50">🏆 Winning sketch · built on the plot</div>
       <div class="p-5">
         <div class="flex items-center justify-between">
-          <h3 id="detail-name" class="text-base font-bold text-slate-900">Building</h3>
-          <span id="detail-reward" class="rounded-full bg-amber-100 border border-amber-200 px-2.5 py-0.5 text-[11px] font-semibold text-amber-700">0 $USDCPLOT</span>
+          <h3 id="detail-name" class="text-base font-bold text-stone-900">Building</h3>
+          <span id="detail-reward" class="rounded-full bg-amber-100 border border-amber-200 px-2.5 py-0.5 text-[11px] font-semibold text-amber-700">0 SOL</span>
         </div>
-        <p id="detail-coord" class="mt-0.5 text-xs text-slate-400 font-mono">Plot (0,0)</p>
-        <p id="detail-winner" class="mt-3 text-sm text-slate-600"></p>
-        <p id="detail-votes" class="mt-1 text-[11px] text-slate-400"></p>
-        <button onclick="closeDetail()" class="mt-4 w-full rounded-xl border border-slate-200 bg-white py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">Close</button>
+        <p id="detail-coord" class="mt-0.5 text-xs text-stone-400 font-mono">Plot (0,0)</p>
+        <p id="detail-winner" class="mt-3 text-sm text-stone-600"></p>
+        <p id="detail-votes" class="mt-1 text-[11px] text-stone-400"></p>
+        <button onclick="closeDetail()" class="mt-4 w-full rounded-xl border border-stone-200 bg-white py-2 text-sm font-medium text-stone-600 hover:bg-stone-50">Close</button>
       </div>
     </div>
   </div>
 
   <!-- toast -->
-  <div id="toast" class="rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-lg"></div>
+  <div id="toast" class="rounded-xl bg-stone-900 px-4 py-3 text-sm font-medium text-white shadow-lg"></div>
 
   <script>
   /* ───────────────── config ───────────────── */
   const GRID_N = 100;
-  const STORE_KEY = 'usdcplot_bounties_v2';
+  const STORE_KEY = 'sketchplot_bounties_v1';
 
   const BUILDINGS = [
     {name:"Survival Hut",diff:"Easy",base:"a tiny rustic wooden survival hut with a thatched roof"},
@@ -287,7 +285,7 @@
   const EXTRAS = ["with a rooftop garden","with a curved driveway","with solar panels","with a fountain out front",
     "surrounded by tall trees","with a glass atrium","with a stone fence","with a small dock","with a courtyard","with neon signage"];
   const RIVALS = ["pixel.sol","ArchMaxi","0xDoodle","plotpainter","frenbuilder","sketch_degen","nocoiner.eth","blueprintbob","villa_villain","crayon_chad","gm_artist","wagmi_lines"];
-  const DIFF_COLOR = {Easy:"text-emerald-600",Medium:"text-blue-600",Hard:"text-amber-600",Elite:"text-fuchsia-600"};
+  const DIFF_COLOR = {Easy:"text-emerald-600",Medium:"text-amber-600",Hard:"text-orange-600",Elite:"text-fuchsia-600"};
 
   /* ───────────────── state ───────────────── */
   let store = loadStore();          // { "x,y": bounty }
@@ -306,7 +304,7 @@
   /* ───────────────── reference generation (different every time) ───────────────── */
   // Everything generated is a pencil/graphite SKETCH on white paper — never a colour 3D render.
   function blueprintUrl(base,style,seed){
-    const p = `pencil sketch drawing of ${base}, ${style.toLowerCase()} architecture, hand-drawn graphite on white paper, isometric, single building centered, clean detailed sketch lines, monochrome, no colour, no shading fill`;
+    const p = `pencil sketch drawing of ${base}, ${style.toLowerCase()} architecture, hand-drawn graphite on white paper, isometric, single building centered, clean detailed sketch lines, monochrome, no colour`;
     return `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=560&height=560&nologo=true&seed=${seed}`;
   }
   function sketchUrl(base,style,seed){
@@ -317,8 +315,9 @@
   function makeBounty(k){
     const b = pick(BUILDINGS), style = pick(STYLES), extra = pick(EXTRAS);
     const seed = rnd(1,9999999);
-    const diffMult = {Easy:1,Medium:1.6,Hard:2.4,Elite:3.6}[b.diff];
-    const reward = Math.round((rnd(18,55)*1000)*diffMult/1000)*1000;
+    // reward paid in SOL, scaled by difficulty
+    const range = {Easy:[0.4,1.8],Medium:[1.5,4.5],Hard:[3,9],Elite:[8,24]}[b.diff];
+    const reward = +(range[0] + Math.random()*(range[1]-range[0])).toFixed(1);
     // seed 1-3 rival submissions so "best wins" is competitive
     const rivalCount = rnd(1,3);
     const subs = pickN(RIVALS, rivalCount).map((name,i)=>({
@@ -386,31 +385,39 @@
     gridEl.querySelector(`[data-k="${k}"]`)?.scrollIntoView({block:'center',inline:'center',behavior:'smooth'});
   }
 
+  /* ───────────────── brief glimpse loader (robust against Pollinations hiccups) ───────────────── */
+  let curBriefUrl=null;
+  function loadBrief(url){
+    if(url) curBriefUrl=url;
+    const bi=document.getElementById('brief-img'), bl=document.getElementById('brief-loading');
+    bi.classList.add('hidden');
+    bl.classList.remove('hidden'); bl.dataset.try='0';
+    bl.innerHTML='<i data-lucide="loader-2" class="mx-auto h-9 w-9 text-amber-500 spin"></i><p class="mt-2 text-xs text-stone-500">Agent is drafting the brief…</p>';
+    lucide.createIcons();
+    bi.onload=()=>{ bi.classList.remove('hidden'); bl.classList.add('hidden'); };
+    bi.onerror=()=>{
+      const n=(+bl.dataset.try)+1; bl.dataset.try=n;
+      if(n<=4){ setTimeout(()=>{ bi.src=curBriefUrl+'&r='+n; }, 900+n*450); }
+      else { bl.innerHTML='<button onclick="loadBrief()" class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700">Brief slow — tap to retry</button>'; lucide.createIcons(); }
+    };
+    bi.src=curBriefUrl;
+  }
+
   /* ───────────────── modal ───────────────── */
   const modal=document.getElementById('modal');
   function openModal(k){
     cur=k; const b=store[k]; const {x,y}=keyToXY(k);
     document.getElementById('modal-id').textContent='#'+b.id;
     document.getElementById('modal-coord').textContent=`Plot (${x}, ${y})`;
-    document.getElementById('modal-reward').textContent=b.reward.toLocaleString()+' $USDCPLOT';
+    document.getElementById('modal-reward').textContent=b.reward+' SOL';
     document.getElementById('brief-name').textContent=b.name;
     document.getElementById('brief-style').textContent=b.style;
-    document.getElementById('brief-desc').textContent=`Sketch ${b.base} ${b.extra}. Trace the reference or freehand it — the winning drawing gets placed on this plot.`;
+    document.getElementById('brief-desc').textContent=`Sketch ${b.base} ${b.extra}. You only get a glimpse — fill in the rest from imagination. The winning drawing gets placed on this plot.`;
     const diffEl=document.getElementById('brief-diff'); diffEl.textContent=b.diff; diffEl.className=(DIFF_COLOR[b.diff]||'')+' font-semibold';
-    // brief image
-    const bi=document.getElementById('brief-img'), bl=document.getElementById('brief-loading');
-    bi.classList.add('hidden'); bl.classList.remove('hidden');
-    const im=new Image();
-    im.onload=()=>{ bi.src=b.brief; bi.classList.remove('hidden'); bl.classList.add('hidden'); };
-    im.onerror=()=>{ bl.classList.add('hidden'); };
-    im.src=b.brief;
-    document.getElementById('trace-img').src=b.brief;
-    document.getElementById('trace-toggle').checked=false;
-    document.getElementById('trace-img').classList.remove('on');
+    loadBrief(b.brief);
     clearDraw(true);
     renderLeaderboard();
     modal.classList.remove('hidden'); modal.classList.add('flex');
-    requestAnimationFrame(fitCanvas);
     lucide.createIcons();
   }
   function closeModal(){ modal.classList.add('hidden'); modal.classList.remove('flex'); cur=null; }
@@ -420,23 +427,23 @@
     document.getElementById('brief-subs').textContent=b.subs.length;
     const sorted=[...b.subs].sort((p,q)=>q.votes-p.votes);
     const top=sorted[0];
-    lb.innerHTML = sorted.map((s,i)=>{
+    lb.innerHTML = sorted.map((s)=>{
       const lead = top && s.id===top.id && b.subs.length>0;
       const voted = b.voted.includes(s.id);
-      return `<div class="rounded-2xl border ${lead?'border-amber-300 ring-1 ring-amber-200':'border-blue-100'} bg-white overflow-hidden">
+      return `<div class="rounded-2xl border ${lead?'border-amber-300 ring-1 ring-amber-200':'border-amber-100'} bg-white overflow-hidden">
         <div class="relative aspect-square bg-white">
-          <img src="${s.img}" class="h-full w-full object-contain bg-white" alt=""/>
+          <img src="${s.img}" onerror="this.style.opacity=.12" class="h-full w-full object-contain bg-white" alt=""/>
           ${lead?'<span class="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5z"/></svg>Leading</span>':''}
           ${s.mine?'<span class="absolute top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-bold text-white">You</span>':''}
         </div>
         <div class="flex items-center justify-between px-3 py-2">
-          <span class="truncate text-xs font-semibold text-slate-700">${s.artist}</span>
-          <button onclick="vote('${s.id}')" ${voted?'disabled':''} class="vote-btn inline-flex items-center gap-1 rounded-lg border border-blue-200 bg-blue-50 px-2 py-1 text-[11px] font-semibold text-blue-700 hover:bg-blue-100">
+          <span class="truncate text-xs font-semibold text-stone-700">${s.artist}</span>
+          <button onclick="vote('${s.id}')" ${voted?'disabled':''} class="vote-btn inline-flex items-center gap-1 rounded-lg border border-amber-200 bg-amber-50 px-2 py-1 text-[11px] font-semibold text-amber-700 hover:bg-amber-100">
             <i data-lucide="arrow-big-up" class="h-3.5 w-3.5"></i> ${s.votes}
           </button>
         </div>
       </div>`;
-    }).join('') || '<p class="col-span-full text-center text-xs text-slate-400 py-6">No submissions yet — be the first to sketch this brief.</p>';
+    }).join('') || '<p class="col-span-full text-center text-xs text-stone-400 py-6">No submissions yet — be the first to sketch this brief.</p>';
     document.getElementById('crown-btn').classList.toggle('hidden', b.subs.length===0);
     lucide.createIcons();
   }
@@ -456,7 +463,7 @@
     b.winnerOwner = win.mine ? (owner||'guest') : null;
     b.builtImg = win.img;   // the winning SKETCH is placed on the plot — no 3D render
     saveStore(); updateTile(cur); refreshStats();
-    toast(`🏆 ${win.artist} won bounty #${b.id} — sketch placed on the plot`);
+    toast(`🏆 ${win.artist} won bounty #${b.id} — ${b.reward} SOL paid`);
     closeModal();
     openDetail(cur);
   }
@@ -464,21 +471,20 @@
   /* ───────────────── drawing canvas ───────────────── */
   const canvas=document.getElementById('canvas');
   const ctx=canvas.getContext('2d');
-  let drawing=false, color='#1f2a44', size=4, eraser=false, strokes=0;
+  let drawing=false, color='#1c1917', size=4, eraser=false, strokes=0;
   let undoStack=[];
-  const COLORS=['#1f2a44','#2775CA','#ef4444','#22c55e','#f59e0b','#8b5cf6','#0f172a','#94a3b8'];
+  const COLORS=['#1c1917','#EA7317','#ef4444','#22c55e','#f59e0b','#8b5cf6','#0f172a','#a8a29e'];
 
   (function initSwatches(){
     const wrap=document.getElementById('swatches');
     wrap.innerHTML=COLORS.map((c,i)=>`<span class="swatch ${i===0?'on':''}" data-c="${c}" style="background:${c}"></span>`).join('');
     wrap.querySelectorAll('.swatch').forEach(sw=>sw.onclick=()=>{
-      eraser=false; document.getElementById('eraser-btn').classList.remove('bg-blue-100','text-blue-700','border-blue-300');
+      eraser=false; document.getElementById('eraser-btn').classList.remove('bg-amber-100','text-amber-700','border-amber-300');
       color=sw.dataset.c; wrap.querySelectorAll('.swatch').forEach(s=>s.classList.remove('on')); sw.classList.add('on');
     });
   })();
   document.getElementById('brush').addEventListener('input', e=> size=Number(e.target.value));
 
-  function fitCanvas(){ /* internal res fixed; CSS scales. nothing needed but keep hook */ }
   function pushUndo(){ try{ undoStack.push(ctx.getImageData(0,0,canvas.width,canvas.height)); if(undoStack.length>25) undoStack.shift(); }catch{} }
   function clearDraw(silent){
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -488,11 +494,10 @@
   function undoDraw(){ if(!undoStack.length) return; ctx.putImageData(undoStack.pop(),0,0); }
   function toggleEraser(){
     eraser=!eraser;
-    document.getElementById('eraser-btn').classList.toggle('bg-blue-100',eraser);
-    document.getElementById('eraser-btn').classList.toggle('text-blue-700',eraser);
-    document.getElementById('eraser-btn').classList.toggle('border-blue-300',eraser);
+    document.getElementById('eraser-btn').classList.toggle('bg-amber-100',eraser);
+    document.getElementById('eraser-btn').classList.toggle('text-amber-700',eraser);
+    document.getElementById('eraser-btn').classList.toggle('border-amber-300',eraser);
   }
-  function toggleTrace(){ document.getElementById('trace-img').classList.toggle('on', document.getElementById('trace-toggle').checked); }
 
   function pos(e){
     const r=canvas.getBoundingClientRect();
@@ -515,27 +520,25 @@
   window.addEventListener('pointerup',end);
 
   function judgeScore(){
-    // crude effort score from drawn pixels + strokes → competitive starting votes
     let nonwhite=0;
     try{
       const d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
       for(let i=0;i<d.length;i+=64){ if(d[i]<240||d[i+1]<240||d[i+2]<240) nonwhite++; }
     }catch{}
-    const coverage=nonwhite/(canvas.width*canvas.height/64); // 0..1
+    const coverage=nonwhite/(canvas.width*canvas.height/64);
     return Math.max(0, Math.min(60, Math.round(coverage*180 + strokes*1.5)));
   }
 
   function submitSketch(){
     const b=store[cur]; if(!b) return;
     if(strokes<2){ toast('Draw something first ✏️'); return; }
-    // composite onto white for a clean thumbnail
     const tmp=document.createElement('canvas'); tmp.width=canvas.width; tmp.height=canvas.height;
     const tc=tmp.getContext('2d'); tc.fillStyle='#fff'; tc.fillRect(0,0,tmp.width,tmp.height); tc.drawImage(canvas,0,0);
     const data=tmp.toDataURL('image/png');
     const score=judgeScore();
     const id='m'+b.id+'_'+Date.now();
     b.subs.push({ id, artist: owner?('you · '+owner):'you', mine:true, img:data, votes:score, ts:Date.now() });
-    b.voted.push(id); // your own auto-counts
+    b.voted.push(id);
     saveStore(); renderLeaderboard();
     toast(`🤖 Judge scored your effort: ${score} votes`);
   }
@@ -546,10 +549,10 @@
     const {x,y}=keyToXY(k);
     document.getElementById('detail-sketch').src=b.winnerSketch||b.builtImg||'';
     document.getElementById('detail-name').textContent=`${b.name} · ${b.style}`;
-    document.getElementById('detail-reward').textContent=b.reward.toLocaleString()+' $USDCPLOT';
+    document.getElementById('detail-reward').textContent=b.reward+' SOL';
     document.getElementById('detail-coord').textContent=`Plot (${x}, ${y})`;
     document.getElementById('detail-winner').innerHTML=`Winning sketch by <b>${b.winnerArtist}</b>${b.winnerOwner?' 🎉 (you!)':''} — the agent built it on this plot.`;
-    document.getElementById('detail-votes').textContent=`${b.winnerVotes} votes · bounty #${b.id} paid out`;
+    document.getElementById('detail-votes').textContent=`${b.winnerVotes} votes · bounty #${b.id} paid out in SOL`;
     const d=document.getElementById('detail'); d.classList.remove('hidden'); d.classList.add('flex');
     lucide.createIcons();
   }
@@ -575,7 +578,6 @@
   function seedBoard(){
     if(bounties().length) return;
     const used=new Set();
-    // all OPEN bounties — nothing pre-built; the board is there to be drawn
     for(let i=0;i<12;i++){
       let k; do{ k=rnd(20,80)+','+rnd(20,80); }while(used.has(k)); used.add(k);
       store[k]=makeBounty(k);

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" class="min-h-full" style="background-color: #F0F6FE;">
+<html lang="en" class="min-h-full" style="background-color: #FBF6EE;">
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USDC PLOT — Sketch-to-Earn Virtual Real Estate</title>
-  <meta name="description" content="The AI agent posts a build brief on every plot. Sketch the building it wants — the best drawing wins the $USDCPLOT bounty and gets built on the plot." />
-  <meta property="og:title" content="USDC PLOT — Sketch-to-Earn Virtual Real Estate" />
-  <meta property="og:description" content="The AI agent posts a build brief on every plot. Sketch the building — the best drawing wins the $USDCPLOT bounty and gets built on the plot." />
+  <title>SKETCHPLOT — Sketch-to-Earn Virtual Real Estate</title>
+  <meta name="description" content="The AI agent posts a build brief on every plot. Sketch the building it wants — the best drawing wins the SOL bounty and gets built on the plot." />
+  <meta property="og:title" content="SKETCHPLOT — Sketch-to-Earn Virtual Real Estate" />
+  <meta property="og:description" content="The AI agent posts a build brief on every plot. Sketch the building — the best drawing wins the SOL bounty and gets built on the plot." />
   <meta property="og:url" content="https://solplot-clone.vercel.app" />
-  <meta property="og:site_name" content="USDC PLOT" />
+  <meta property="og:site_name" content="SKETCHPLOT" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="USDC PLOT" />
+  <meta property="og:image:alt" content="SKETCHPLOT" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="USDC PLOT — Sketch-to-Earn Virtual Real Estate" />
-  <meta name="twitter:description" content="The AI agent posts a build brief on every plot. Sketch the building — the best drawing wins the $USDCPLOT bounty and gets built on the plot." />
+  <meta name="twitter:title" content="SKETCHPLOT — Sketch-to-Earn Virtual Real Estate" />
+  <meta name="twitter:description" content="The AI agent posts a build brief on every plot. Sketch the building — the best drawing wins the SOL bounty and gets built on the plot." />
   <meta name="twitter:image" content="/og-image.png" />
 
   <!-- Tailwind CSS CDN -->
@@ -28,7 +28,7 @@
         extend: {
           colors: {
             glass: {
-              bg: '#F0F6FE',
+              bg: '#FBF6EE',
               surface: 'rgba(255, 255, 255, 0.85)',
               card: 'rgba(255, 255, 255, 0.92)',
               border: 'rgba(15, 23, 42, 0.08)',
@@ -36,11 +36,11 @@
               text: '#0f172a',
               secondary: '#64748b',
               muted: '#94a3b8',
-              accent: '#3D9BE0',
+              accent: '#F59E0B',
               green: '#22C55E',
               red: '#EF4444',
-              blue: '#3B82F6',
-              purple: '#2775CA',
+              blue: '#F59E0B',
+              purple: '#EA7317',
             },
           },
           fontFamily: {
@@ -79,7 +79,7 @@
 
   <style>
     :root {
-      --glass-bg: #F0F6FE;
+      --glass-bg: #FBF6EE;
       --glass-surface: rgba(255, 255, 255, 0.85);
       --glass-card: rgba(255, 255, 255, 0.92);
       --glass-border: rgba(15, 23, 42, 0.08);
@@ -87,8 +87,8 @@
       --glass-text: #0f172a;
       --glass-secondary: #64748b;
       --glass-muted: #94a3b8;
-      --glass-accent: #3D9BE0;
-      --glass-purple: #2775CA;
+      --glass-accent: #F59E0B;
+      --glass-purple: #EA7317;
       --glass-green: #22C55E;
       --glass-red: #EF4444;
     }
@@ -102,7 +102,7 @@
     html {
       scroll-behavior: smooth;
       color-scheme: light;
-      background-color: #F0F6FE;
+      background-color: #FBF6EE;
       min-height: 100%;
     }
 
@@ -131,7 +131,7 @@
     }
 
     ::selection {
-      background-color: rgba(39, 117, 202, 0.22);
+      background-color: rgba(234,115,23, 0.22);
       color: #0f172a;
     }
 
@@ -173,8 +173,8 @@
       overflow: hidden;
       border-radius: 0.5rem;
       border: 1px solid rgba(255, 255, 255, 0.25);
-      background: linear-gradient(165deg, rgba(39, 117, 202, 0.92) 0%, rgba(31, 99, 173, 0.94) 45%, rgba(20, 70, 130, 0.96) 100%);
-      box-shadow: 0 6px 24px rgba(20, 70, 130, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+      background: linear-gradient(165deg, rgba(234,115,23, 0.92) 0%, rgba(194,87,11, 0.94) 45%, rgba(146,64,14, 0.96) 100%);
+      box-shadow: 0 6px 24px rgba(146,64,14, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.32);
       ring: 1px solid rgba(255, 255, 255, 0.20);
       backdrop-filter: blur(12px);
       transition: filter 0.2s;
@@ -253,7 +253,7 @@
 
     /* Glass text gradient */
     .glass-text-gradient {
-      background: linear-gradient(135deg, #3D9BE0 0%, #2775CA 50%, #0f172a 100%);
+      background: linear-gradient(135deg, #F59E0B 0%, #EA7317 50%, #0f172a 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -295,7 +295,7 @@
     .faq-item summary::-webkit-details-marker { display: none; }
     .faq-item .chev { transition: transform .25s ease; }
     .faq-item[open] .chev { transform: rotate(45deg); }
-    .faq-item[open] { border-color: rgba(39,117,202,.45); box-shadow: 0 8px 30px rgba(39,117,202,.10); }
+    .faq-item[open] { border-color: rgba(234,115,23,.45); box-shadow: 0 8px 30px rgba(234,115,23,.10); }
     .faq-item .faq-a { max-height: 0; overflow: hidden; }
     .faq-item[open] .faq-a { max-height: 320px; }
 
@@ -311,7 +311,7 @@
     .reveal.in { opacity:1; transform:none; }
     /* card hover lift */
     .rounded-2xl.shadow-sm { transition: transform .25s ease, box-shadow .25s ease; }
-    .rounded-2xl.shadow-sm:hover { transform: translateY(-5px); box-shadow: 0 18px 44px -20px rgba(20,70,130,.45); }
+    .rounded-2xl.shadow-sm:hover { transform: translateY(-5px); box-shadow: 0 18px 44px -20px rgba(146,64,14,.45); }
     /* button micro-interaction */
     .purple-cta-base { transition: filter .2s ease, transform .15s ease, box-shadow .2s ease; }
     .purple-cta-base:hover { transform: translateY(-1px); }
@@ -321,50 +321,50 @@
     }
   </style>
 </head>
-<body class="font-body min-h-dvh text-slate-900 antialiased" style="background-color: #F0F6FE;">
+<body class="font-body min-h-dvh text-slate-900 antialiased" style="background-color: #FBF6EE;">
   <canvas id="falling-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;" aria-hidden="true"></canvas>
 
-  <main class="min-h-screen text-slate-900" style="background-color: #EEF4FD;">
+  <main class="min-h-screen text-slate-900" style="background-color: #F7F1E8;">
 
     <!-- ═══════════════════════════════════════════════════════════════════
          FLOATING HEADER
          ═══════════════════════════════════════════════════════════════════ -->
-    <header class="sticky top-0 z-[60] w-full border-b border-blue-100/80 bg-white/85 backdrop-blur-xl" id="site-header">
+    <header class="sticky top-0 z-[60] w-full border-b border-amber-100/80 bg-white/85 backdrop-blur-xl" id="site-header">
       <div class="mx-auto flex h-[64px] max-w-[1180px] items-center justify-between px-5 md:px-8">
         <!-- Logo -->
         <a href="index.html" class="flex shrink-0 items-center gap-2.5" id="logo-link">
           <img src="favicon.svg"
-               alt="USDC PLOT" width="64" height="64" class="h-7 w-7 shrink-0 object-contain" />
-          <span class="font-display text-[17px] font-bold tracking-tight text-slate-900 md:text-lg">USDC PLOT</span>
+               alt="SKETCHPLOT" width="64" height="64" class="h-7 w-7 shrink-0 object-contain" />
+          <span class="font-display text-[17px] font-bold tracking-tight text-slate-900 md:text-lg">SKETCHPLOT</span>
         </a>
 
         <!-- Desktop Nav -->
         <nav class="hidden items-center gap-1 md:flex">
-          <a href="how-it-works.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-slate-900 transition-colors no-underline">How It Works</a>
-        <a href="grid.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-slate-900 transition-colors no-underline">Bounty Board</a>
+          <a href="how-it-works.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-amber-50 hover:text-slate-900 transition-colors no-underline">How It Works</a>
+        <a href="grid.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-amber-50 hover:text-slate-900 transition-colors no-underline">Bounty Board</a>
         </nav>
 
         <!-- Right side -->
         <div class="flex items-center gap-2">
-          <a href="https://x.com/usdcplot" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-blue-200 bg-white text-slate-700 hover:bg-blue-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://x.com/sketchplot" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-amber-200 bg-white text-slate-700 hover:bg-amber-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
           <button onclick="connectPhantom()" id="connect-btn" class="purple-cta-base h-[38px] px-3.5 sm:px-4">
             <span class="relative z-[1] flex items-center gap-1.5">
               <img src="https://cdn.brandfetch.io/idf5VaJxyT/theme/light/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="" width="18" height="18" class="h-[18px] w-[18px] shrink-0 object-contain brightness-0 invert" style="opacity:0.98;" aria-hidden="true" />
               <span class="whitespace-nowrap text-[14px] font-medium text-white" id="connect-text">Connect Phantom</span>
             </span>
           </button>
-          <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var t=b.querySelector('.buy-t');var o=t.textContent;t.textContent='Copied CA!';setTimeout(function(){t.textContent=o;},1500);})(this)" class="hidden md:inline-flex h-[38px] items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 text-[14px] font-semibold text-white hover:bg-blue-700 transition-colors"><span class="buy-t">Buy $USDCPLOT</span></button>
-          <button type="button" onclick="document.getElementById('m-menu').classList.toggle('hidden')" class="grid h-9 w-9 place-items-center rounded-lg border border-blue-200 bg-white text-slate-700 md:hidden" aria-label="Open menu">
+          <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var t=b.querySelector('.buy-t');var o=t.textContent;t.textContent='Copied CA!';setTimeout(function(){t.textContent=o;},1500);})(this)" class="hidden md:inline-flex h-[38px] items-center gap-1.5 rounded-lg bg-amber-600 px-3.5 text-[14px] font-semibold text-white hover:bg-amber-700 transition-colors"><span class="buy-t">Buy $SKETCH</span></button>
+          <button type="button" onclick="document.getElementById('m-menu').classList.toggle('hidden')" class="grid h-9 w-9 place-items-center rounded-lg border border-amber-200 bg-white text-slate-700 md:hidden" aria-label="Open menu">
             <i data-lucide="menu" class="h-5 w-5"></i>
           </button>
         </div>
       </div>
 
       <!-- Mobile menu -->
-      <div id="m-menu" class="hidden border-t border-blue-100 bg-white px-5 py-3 md:hidden">
-        <a href="how-it-works.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-50 no-underline">How It Works</a>
-        <a href="grid.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-50 no-underline">Bounty Board</a>
-      <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var t=b.querySelector('.buy-t');var o=t.textContent;t.textContent='Copied CA!';setTimeout(function(){t.textContent=o;},1500);})(this)" class="mt-1 block w-full rounded-lg bg-blue-600 px-3 py-2.5 text-left text-sm font-semibold text-white"><span class="buy-t">Buy $USDCPLOT</span></button>
+      <div id="m-menu" class="hidden border-t border-amber-100 bg-white px-5 py-3 md:hidden">
+        <a href="how-it-works.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-amber-50 no-underline">How It Works</a>
+        <a href="grid.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-amber-50 no-underline">Bounty Board</a>
+      <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var t=b.querySelector('.buy-t');var o=t.textContent;t.textContent='Copied CA!';setTimeout(function(){t.textContent=o;},1500);})(this)" class="mt-1 block w-full rounded-lg bg-amber-600 px-3 py-2.5 text-left text-sm font-semibold text-white"><span class="buy-t">Buy $SKETCH</span></button>
       </div>
     </header>
 
@@ -375,15 +375,15 @@
       id="hero"
       aria-label="Hero"
       class="relative isolate flex w-full flex-col overflow-hidden"
-      style="background-color: #DCE9FB; scroll-margin-top: 5rem; padding-top: 3.5rem;"
+      style="background-color: #F3E7D4; scroll-margin-top: 5rem; padding-top: 3.5rem;"
     >
       <!-- Hero Background -->
       <div class="pointer-events-none absolute inset-x-0 bottom-0" style="top: -7.75rem;" aria-hidden="true">
         <div
           class="absolute inset-0"
-          style="background-image: radial-gradient(60% 50% at 18% 18%, rgba(61,155,224,.38) 0%, transparent 60%), radial-gradient(55% 45% at 84% 8%, rgba(39,117,202,.34) 0%, transparent 58%), radial-gradient(70% 60% at 50% 102%, rgba(20,70,130,.30) 0%, transparent 60%), linear-gradient(180deg, #DCE9FB 0%, #EEF4FD 70%); background-size: cover;"
+          style="background-image: radial-gradient(60% 50% at 18% 18%, rgba(245,158,11,.38) 0%, transparent 60%), radial-gradient(55% 45% at 84% 8%, rgba(234,115,23,.34) 0%, transparent 58%), radial-gradient(70% 60% at 50% 102%, rgba(146,64,14,.30) 0%, transparent 60%), linear-gradient(180deg, #F3E7D4 0%, #F7F1E8 70%); background-size: cover;"
         ></div>
-        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(235, 243, 253, 0.18) 0%, rgba(235, 243, 253, 0.42) 55%, rgba(235, 243, 253, 0.68) 100%);"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(247,241,232, 0.18) 0%, rgba(247,241,232, 0.42) 55%, rgba(247,241,232, 0.68) 100%);"></div>
       </div>
 
       <!-- Hero Content (two-column, distinct layout) -->
@@ -392,22 +392,22 @@
 
           <!-- Left: copy -->
           <div class="text-center lg:text-left">
-            <span class="anim-up mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-medium text-blue-700 backdrop-blur-sm" style="animation-delay:.05s">
+            <span class="anim-up mb-6 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-medium text-amber-700 backdrop-blur-sm" style="animation-delay:.05s">
               <span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span> Draw-to-earn · on-chain · sketch bounties
             </span>
             <h1 class="anim-up font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-[3.25rem] lg:text-[3.7rem]" style="animation-delay:.14s">
               Sketch the building, win the
-              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;">bounty</span>
+              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#C2570B;">bounty</span>
             </h1>
             <p class="anim-up mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg lg:mx-0" style="animation-delay:.22s">
-              <span class="font-semibold text-blue-700">$USDCPLOT</span> is an AI real-estate agent that posts a build brief on every plot — a pencil-sketch blueprint plus a bounty.
+              <span class="font-semibold text-amber-700">$SKETCH</span> is an AI real-estate agent that posts a build brief on every plot — a pencil-sketch blueprint plus a bounty.
               Draw the building it wants; the best drawing wins the reward and gets built on the map.
             </p>
             <div class="anim-up mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start" style="animation-delay:.3s">
               <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var s=b.querySelector('.cta-t');var o=s.textContent;s.textContent='Copied CA!';setTimeout(function(){s.textContent=o;},1500);})(this)" class="purple-cta-base h-12 px-6 text-base font-medium">
-                <span class="relative z-[1] flex items-center gap-2"><span class="cta-t text-white">Buy $USDCPLOT</span><i data-lucide="copy" class="h-4 w-4 text-white"></i></span>
+                <span class="relative z-[1] flex items-center gap-2"><span class="cta-t text-white">Buy $SKETCH</span><i data-lucide="copy" class="h-4 w-4 text-white"></i></span>
               </button>
-              <a href="grid.html" class="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white px-6 text-base font-medium text-slate-700 hover:bg-blue-50 transition-colors no-underline">
+              <a href="grid.html" class="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-amber-200 bg-white px-6 text-base font-medium text-slate-700 hover:bg-amber-50 transition-colors no-underline">
                 Open the bounty board
               </a>
             </div>
@@ -422,16 +422,16 @@
 
           <!-- Right: live grid in a clean app window -->
           <div class="relative anim-up" style="animation-delay:.26s">
-            <div class="glowpulse pointer-events-none absolute -inset-4 -z-10 rounded-[28px]" style="background:radial-gradient(60% 60% at 50% 40%, rgba(39,117,202,.25), transparent 70%);"></div>
-            <div class="floaty overflow-hidden rounded-2xl border border-blue-200/70 bg-white shadow-[0_24px_70px_-24px_rgba(20,70,130,0.45)]">
-              <div class="flex items-center gap-2 border-b border-blue-100 bg-white px-4 py-2.5">
+            <div class="glowpulse pointer-events-none absolute -inset-4 -z-10 rounded-[28px]" style="background:radial-gradient(60% 60% at 50% 40%, rgba(234,115,23,.25), transparent 70%);"></div>
+            <div class="floaty overflow-hidden rounded-2xl border border-amber-200/70 bg-white shadow-[0_24px_70px_-24px_rgba(146,64,14,0.45)]">
+              <div class="flex items-center gap-2 border-b border-amber-100 bg-white px-4 py-2.5">
                 <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
                 <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
                 <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-                <span class="ml-2 flex-1 truncate rounded-md bg-blue-50 px-3 py-1 text-center font-mono text-[11px] text-slate-400">the agent · live bounty board</span>
-                <span class="inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold text-blue-600"><span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>Live</span>
+                <span class="ml-2 flex-1 truncate rounded-md bg-amber-50 px-3 py-1 text-center font-mono text-[11px] text-slate-400">the agent · live bounty board</span>
+                <span class="inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold text-amber-600"><span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span>Live</span>
               </div>
-              <div style="aspect-ratio:1/1;"><iframe src="grid.html" class="h-full w-full border-0" loading="lazy" title="USDC PLOT live grid"></iframe></div>
+              <div style="aspect-ratio:1/1;"><iframe src="grid.html" class="h-full w-full border-0" loading="lazy" title="SKETCHPLOT live grid"></iframe></div>
             </div>
           </div>
 
@@ -440,9 +440,9 @@
     </section>
 
     <!-- ───────────── STATS BAND ───────────── -->
-    <section aria-label="Live stats" style="background:#EEF4FD;">
+    <section aria-label="Live stats" style="background:#F7F1E8;">
       <div class="mx-auto max-w-[1100px] px-5 md:px-8">
-        <div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-blue-200/60 bg-blue-100/70 shadow-sm sm:grid-cols-4">
+        <div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-amber-200/60 bg-amber-100/70 shadow-sm sm:grid-cols-4">
           <div class="bg-white px-5 py-6 text-center">
             <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl" data-count="10000">10,000</div>
             <div class="mt-1 text-xs font-medium text-slate-500">Plots on the map</div>
@@ -452,11 +452,11 @@
             <div class="mt-1 text-xs font-medium text-slate-500">Bounties posted</div>
           </div>
           <div class="bg-white px-5 py-6 text-center">
-            <div class="font-display text-2xl font-bold text-blue-700 md:text-3xl" id="stat-buildings">0</div>
+            <div class="font-display text-2xl font-bold text-amber-700 md:text-3xl" id="stat-buildings">0</div>
             <div class="mt-1 text-xs font-medium text-slate-500">Sketches built</div>
           </div>
           <div class="bg-white px-5 py-6 text-center">
-            <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl">$USDCPLOT</div>
+            <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl">SOL</div>
             <div class="mt-1 text-xs font-medium text-slate-500">Bounties paid in</div>
           </div>
         </div>
@@ -466,7 +466,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════
          FEATURES BENTO
          ═══════════════════════════════════════════════════════════════════ -->
-    <section id="features" style="background:rgba(235,243,253,0.88); scroll-margin-top:max(6.75rem,calc(env(safe-area-inset-top) + 5.75rem));">
+    <section id="features" style="background:rgba(247,241,232,0.88); scroll-margin-top:max(6.75rem,calc(env(safe-area-inset-top) + 5.75rem));">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-28">
 
         <div class="flex flex-col items-center text-center mb-14" data-aos="fade-up">
@@ -475,10 +475,10 @@
           </span>
           <h2 class="font-display text-[2.3rem] font-bold tracking-tight text-slate-900 md:text-5xl max-w-3xl leading-[1.12]">
             One agent runs the entire
-            <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:#1f63ad;"> bounty board</span>
+            <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:#C2570B;"> bounty board</span>
           </h2>
           <p class="mt-5 text-[15px] text-slate-500 max-w-lg leading-relaxed">
-            A living world on-chain. Open a brief, sketch the building, and win <strong class="font-semibold text-blue-700">$USDCPLOT</strong> when your drawing gets the most votes.
+            A living world on-chain. Open a brief, sketch the building, and win <strong class="font-semibold text-amber-700">SOL</strong> when your drawing gets the most votes.
           </p>
         </div>
 
@@ -486,39 +486,39 @@
         <div class="grid gap-4 lg:grid-cols-2 mb-4">
 
           <!-- Claim tile card -->
-          <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up">
+          <div class="rounded-2xl border border-amber-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up">
             <div class="p-7 pb-0">
               <h3 class="text-[20px] font-semibold text-slate-900">The agent's live bounty board</h3>
-              <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">Pick a plot on the shared 100×100 map. Each one carries a fresh build brief and a $USDCPLOT bounty to sketch for.</p>
+              <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">Pick a plot on the shared 100×100 map. Each one carries a fresh build brief and a SOL bounty to sketch for.</p>
             </div>
             <div class="p-5">
-              <div class="rounded-xl border border-blue-100 overflow-hidden bg-white shadow-sm">
-                <div class="flex items-center justify-between px-4 py-2.5 border-b border-blue-100">
+              <div class="rounded-xl border border-amber-100 overflow-hidden bg-white shadow-sm">
+                <div class="flex items-center justify-between px-4 py-2.5 border-b border-amber-100">
                   <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">Live Bounty Board</span>
-                  <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-100 px-2.5 py-1 text-[10px] font-semibold text-blue-700">
-                    <span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-100 px-2.5 py-1 text-[10px] font-semibold text-amber-700">
+                    <span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span>
                     <span id="mini-grid-stat">Live</span>
                   </span>
                 </div>
                 <div style="aspect-ratio:1/1;overflow:hidden;">
-                  <iframe src="grid.html" class="w-full h-full border-0" loading="lazy" title="USDC PLOT Live Grid"></iframe>
+                  <iframe src="grid.html" class="w-full h-full border-0" loading="lazy" title="SKETCHPLOT Live Grid"></iframe>
                 </div>
-                <div class="flex items-center justify-between px-4 py-2.5 border-t border-blue-100">
+                <div class="flex items-center justify-between px-4 py-2.5 border-t border-amber-100">
                   <span class="text-[10px] text-slate-400">100 x 100 total plots</span>
-                  <a href="grid.html" class="text-[10px] font-semibold text-blue-700 hover:underline no-underline">Explore grid</a>
+                  <a href="grid.html" class="text-[10px] font-semibold text-amber-700 hover:underline no-underline">Explore grid</a>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- AI Builder card -->
-          <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="80">
+          <div class="rounded-2xl border border-amber-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="80">
             <div class="p-7 pb-0">
               <h3 class="text-[20px] font-semibold text-slate-900">Sketch the brief in the studio</h3>
               <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">The agent hands you a pencil-sketch blueprint. Trace it or freehand it on the canvas, then submit your drawing to the bounty.</p>
             </div>
             <div class="p-5">
-              <div class="rounded-xl border border-blue-100 bg-white p-4 shadow-sm">
+              <div class="rounded-xl border border-amber-100 bg-white p-4 shadow-sm">
                 <!-- Brief selector -->
                 <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">Build Brief</p>
                 <div class="flex items-center justify-between rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 mb-3">
@@ -526,11 +526,11 @@
                     <span class="h-2 w-2 rounded-full bg-amber-500 shrink-0"></span>
                     <span class="text-[12px] font-semibold text-amber-900">Beachfront Villa · Modern</span>
                   </div>
-                  <span class="rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-bold text-white shrink-0">132,000 $USDCPLOT</span>
+                  <span class="rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-bold text-white shrink-0">6.4 SOL</span>
                 </div>
                 <!-- Brief note -->
                 <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">The Brief</p>
-                <div class="rounded-lg border border-blue-100 bg-[#F0F6FE] px-3 py-2 mb-3">
+                <div class="rounded-lg border border-amber-100 bg-[#FBF6EE] px-3 py-2 mb-3">
                   <span class="text-[11px] italic text-slate-500">"sketch this villa — best drawing wins the bounty"</span>
                 </div>
                 <!-- Pencil-sketch reference -->
@@ -538,7 +538,7 @@
                   <img src="https://image.pollinations.ai/prompt/pencil%20sketch%20drawing%20of%20a%20beachfront%20villa%20with%20an%20infinity%20pool%20and%20palm%20trees%2C%20modern%20architecture%2C%20hand-drawn%20graphite%20on%20white%20paper%2C%20isometric%2C%20single%20building%20centered%2C%20clean%20sketch%20lines%2C%20monochrome%2C%20no%20colour?width=640&height=640&nologo=true&seed=771204" alt="Pencil sketch brief" class="absolute inset-0 w-full h-full object-contain bg-white">
                   <span class="absolute bottom-2 right-2 rounded-lg bg-slate-900/85 px-2.5 py-1 text-[10px] font-bold text-white">Pencil sketch</span>
                 </div>
-                <a href="grid.html" class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 no-underline">
+                <a href="grid.html" class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-amber-600 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 no-underline">
                   Open the studio <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
                 </a>
               </div>
@@ -550,81 +550,81 @@
         <div class="grid gap-4 sm:grid-cols-3">
 
           <!-- 20 Tiers -->
-          <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up">
+          <div class="rounded-2xl border border-amber-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up">
             <div class="p-6 pb-4">
               <h3 class="text-[17px] font-semibold text-slate-900">Briefs scale = bigger bounties</h3>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">From survival hut to royal hyper villa. Harder briefs carry bigger $USDCPLOT rewards.</p>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">From survival hut to royal hyper villa. Harder briefs carry bigger SOL rewards.</p>
             </div>
             <div class="px-5 pb-5 space-y-2">
-              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 1</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-blue-200" style="width:5%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">Free</span></div>
-              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 5</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-blue-300" style="width:22%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">400</span></div>
-              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 10</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-blue-500" style="width:44%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">1.5k</span></div>
-              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 15</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-blue-700" style="width:70%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">5k</span></div>
-              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] font-semibold text-blue-700">Tier 20</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full" style="width:100%;background:linear-gradient(90deg,#2775CA,#0A2540)"></div></div><span class="text-[10px] font-semibold text-blue-700 w-8 text-right">15k</span></div>
+              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 1</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-amber-200" style="width:5%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">Free</span></div>
+              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 5</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-amber-300" style="width:22%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">400</span></div>
+              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 10</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:44%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">1.5k</span></div>
+              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 15</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-amber-700" style="width:70%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">5k</span></div>
+              <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] font-semibold text-amber-700">Tier 20</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full" style="width:100%;background:linear-gradient(90deg,#EA7317,#2A1A0F)"></div></div><span class="text-[10px] font-semibold text-amber-700 w-8 text-right">15k</span></div>
             </div>
           </div>
 
           <!-- Live World Stats -->
-          <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="80">
+          <div class="rounded-2xl border border-amber-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="80">
             <div class="p-6 pb-4">
               <h3 class="text-[17px] font-semibold text-slate-900">Live on the Shared World</h3>
               <p class="mt-2 text-sm text-slate-500 leading-relaxed">Every winning sketch lands live on the map. Visible to every explorer instantly.</p>
             </div>
             <div class="px-5 pb-5 space-y-2">
-              <div class="flex items-center justify-between rounded-xl border border-blue-100 bg-white px-3.5 py-2.5">
+              <div class="flex items-center justify-between rounded-xl border border-amber-100 bg-white px-3.5 py-2.5">
                 <span class="text-xs text-slate-500">Total Plots</span>
                 <span class="font-mono text-sm font-semibold text-slate-900">10,000</span>
               </div>
-              <div class="flex items-center justify-between rounded-xl border border-blue-100 bg-white px-3.5 py-2.5">
+              <div class="flex items-center justify-between rounded-xl border border-amber-100 bg-white px-3.5 py-2.5">
                 <span class="text-xs text-slate-500">Open bounties</span>
                 <span class="font-mono text-sm font-semibold text-amber-600" id="bento-stat-claimed">...</span>
               </div>
-              <div class="flex items-center justify-between rounded-xl border border-blue-100 bg-white px-3.5 py-2.5">
+              <div class="flex items-center justify-between rounded-xl border border-amber-100 bg-white px-3.5 py-2.5">
                 <span class="text-xs text-slate-500">Sketches built</span>
-                <span class="font-mono text-sm font-semibold text-blue-700" id="bento-stat-buildings">...</span>
+                <span class="font-mono text-sm font-semibold text-amber-700" id="bento-stat-buildings">...</span>
               </div>
               <div class="flex items-center gap-2 pt-0.5 px-0.5">
-                <span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span>
                 <span class="text-[11px] text-slate-400">Updates in real-time</span>
               </div>
             </div>
           </div>
 
-          <!-- $USDCPLOT Balance card -->
-          <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="160">
+          <!-- $SKETCH Balance card -->
+          <div class="rounded-2xl border border-amber-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="160">
             <div class="p-6 pb-4">
-              <h3 class="text-[17px] font-semibold text-slate-900">Your $USDCPLOT, your edge</h3>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">Hold $USDCPLOT to unlock higher-tier briefs and bigger bounties. Connect your wallet to see what you can sketch for.</p>
+              <h3 class="text-[17px] font-semibold text-slate-900">Your $SKETCH, your edge</h3>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">Hold $SKETCH to unlock higher-tier briefs and bigger bounties. Connect your wallet to see what you can sketch for.</p>
             </div>
             <div class="px-5 pb-5">
               <!-- Disconnected state -->
-              <div id="wallet-card-disconnected" class="rounded-xl border border-blue-100 bg-white p-4">
+              <div id="wallet-card-disconnected" class="rounded-xl border border-amber-100 bg-white p-4">
                 <div class="flex flex-col items-center gap-3 py-1">
-                  <div class="h-11 w-11 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center">
+                  <div class="h-11 w-11 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center">
                     <img src="https://cdn.brandfetch.io/idf5VaJxyT/theme/light/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" class="h-6 w-6 object-contain" alt="">
                   </div>
-                  <p class="text-xs text-slate-500 text-center leading-relaxed">Connect your wallet to check your $USDCPLOT balance and see which building tier you qualify for.</p>
-                  <button onclick="connectPhantom()" class="w-full rounded-xl bg-blue-600 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity">
+                  <p class="text-xs text-slate-500 text-center leading-relaxed">Connect your wallet to check your $SKETCH balance and see which building tier you qualify for.</p>
+                  <button onclick="connectPhantom()" class="w-full rounded-xl bg-amber-600 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity">
                     Connect Phantom
                   </button>
                 </div>
               </div>
               <!-- Connected state -->
-              <div id="wallet-card-connected" class="rounded-xl border border-blue-100 bg-white p-4 hidden">
-                <div class="flex items-center gap-3 pb-3 mb-3 border-b border-blue-100">
-                  <div class="h-9 w-9 shrink-0 rounded-full" style="background:linear-gradient(135deg,#6BA9E6,#1f63ad)"></div>
+              <div id="wallet-card-connected" class="rounded-xl border border-amber-100 bg-white p-4 hidden">
+                <div class="flex items-center gap-3 pb-3 mb-3 border-b border-amber-100">
+                  <div class="h-9 w-9 shrink-0 rounded-full" style="background:linear-gradient(135deg,#FBBF24,#C2570B)"></div>
                   <div class="min-w-0">
                     <p class="text-xs font-semibold text-slate-900 truncate" id="wallet-card-address">---</p>
-                    <p class="text-[10px] text-slate-400"><span id="wallet-card-balance">0</span> $USDCPLOT</p>
+                    <p class="text-[10px] text-slate-400"><span id="wallet-card-balance">0</span> $SKETCH</p>
                   </div>
-                  <span class="ml-auto shrink-0 inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-700">
-                    <span class="h-1 w-1 rounded-full bg-blue-500 animate-pulse"></span>Live
+                  <span class="ml-auto shrink-0 inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                    <span class="h-1 w-1 rounded-full bg-amber-500 animate-pulse"></span>Live
                   </span>
                 </div>
                 <div class="space-y-2 mb-3">
                   <div class="flex items-center justify-between">
                     <span class="text-[11px] text-slate-400">Current tier</span>
-                    <span class="font-mono text-[11px] font-semibold text-blue-700" id="wallet-card-tier">Tier 1</span>
+                    <span class="font-mono text-[11px] font-semibold text-amber-700" id="wallet-card-tier">Tier 1</span>
                   </div>
                   <div class="flex items-center justify-between">
                     <span class="text-[11px] text-slate-400">Building type</span>
@@ -632,10 +632,10 @@
                   </div>
                   <div class="flex items-center justify-between">
                     <span class="text-[11px] text-slate-400">Next tier at</span>
-                    <span class="font-mono text-[11px] text-slate-500" id="wallet-card-next-tier">100 $USDCPLOT</span>
+                    <span class="font-mono text-[11px] text-slate-500" id="wallet-card-next-tier">100 $SKETCH</span>
                   </div>
                 </div>
-                <a href="grid.html" class="flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity no-underline">
+                <a href="grid.html" class="flex w-full items-center justify-center gap-1.5 rounded-xl bg-amber-600 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity no-underline">
                   Sketch Now <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
                 </a>
               </div>
@@ -646,31 +646,31 @@
     </section>
 
 
-    <!-- ───────────── WHY USDC PLOT ───────────── -->
+    <!-- ───────────── WHY SKETCHPLOT ───────────── -->
     <section id="why" class="border-t border-slate-900/[0.05]" style="background:rgba(255,255,255,0.92);">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-28">
         <div class="flex flex-col items-center text-center mb-14" data-aos="fade-up">
-          <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Why USDC PLOT</span>
+          <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Why SKETCHPLOT</span>
           <h2 class="font-display text-[2.1rem] font-bold tracking-tight text-slate-900 md:text-[2.6rem] max-w-2xl leading-[1.12]">
-            A bounty board that<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> never sleeps</span>
+            A bounty board that<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#C2570B;"> never sleeps</span>
           </h2>
-          <p class="mt-4 text-[15px] text-slate-500 max-w-lg leading-relaxed">No team. No mascot. Just an agent posting build briefs and paying out $USDCPLOT to the best artists — autonomously, on-chain, around the clock.</p>
+          <p class="mt-4 text-[15px] text-slate-500 max-w-lg leading-relaxed">No team. No mascot. Just an agent posting build briefs and paying out SOL to the best artists — autonomously, on-chain, around the clock.</p>
         </div>
         <div class="grid gap-5 md:grid-cols-3" data-aos="fade-up">
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
-            <div class="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><i data-lucide="bot" class="h-5 w-5"></i></div>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-7 shadow-sm">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-amber-50 text-amber-600"><i data-lucide="bot" class="h-5 w-5"></i></div>
             <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Autonomous agent</h3>
             <p class="mt-2 text-sm leading-relaxed text-slate-500">The agent drafts a fresh blueprint, posts the bounty, and scores the entries around the clock — no human input.</p>
           </div>
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
-            <div class="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><i data-lucide="coins" class="h-5 w-5"></i></div>
-            <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Real $USDCPLOT bounties</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every brief carries a posted reward. The drawing with the most votes wins the bounty — paid out automatically.</p>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-7 shadow-sm">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-amber-50 text-amber-600"><i data-lucide="coins" class="h-5 w-5"></i></div>
+            <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Real SOL bounties</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every brief carries a posted SOL reward. The drawing with the most votes wins the bounty — paid out automatically.</p>
           </div>
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
-            <div class="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><i data-lucide="megaphone" class="h-5 w-5"></i></div>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-7 shadow-sm">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-amber-50 text-amber-600"><i data-lucide="megaphone" class="h-5 w-5"></i></div>
             <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Runs in public</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every new brief, submission, and winning sketch is auto-posted to @usdcplot, so the board plays out live for everyone.</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every new brief, submission, and winning sketch is auto-posted to @sketchplot, so the board plays out live for everyone.</p>
           </div>
         </div>
       </div>
@@ -678,7 +678,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════
          BUILDING TIERS
          ═══════════════════════════════════════════════════════════════════ -->
-    <section id="tiers" class="border-t border-slate-900/[0.05]" style="background:rgba(235,243,253,0.88); scroll-margin-top:max(6.75rem,calc(env(safe-area-inset-top) + 5.75rem));">
+    <section id="tiers" class="border-t border-slate-900/[0.05]" style="background:rgba(247,241,232,0.88); scroll-margin-top:max(6.75rem,calc(env(safe-area-inset-top) + 5.75rem));">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-28">
 
         <div class="flex flex-col items-center text-center mb-12" data-aos="fade-up">
@@ -686,33 +686,33 @@
             Building Tiers
           </span>
           <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] leading-[1.13]">
-            20 Tiers,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> From Hut to Hyper Villa</span>
+            20 Tiers,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#C2570B;"> From Hut to Hyper Villa</span>
           </h2>
-          <p class="mt-3 text-[15px] text-slate-500 max-w-md leading-relaxed">Every brief is a building type — from survival hut to royal hyper villa. The harder the tier, the bigger the $USDCPLOT bounty on the line.</p>
+          <p class="mt-3 text-[15px] text-slate-500 max-w-md leading-relaxed">Every brief is a building type — from survival hut to royal hyper villa. The harder the tier, the bigger the SOL bounty on the line.</p>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-5" data-aos="fade-up">
-          <div class="rounded-2xl border border-blue-200/50 bg-white overflow-hidden shadow-sm">
+          <div class="rounded-2xl border border-amber-200/50 bg-white overflow-hidden shadow-sm">
             <div class="overflow-hidden bg-white" style="aspect-ratio:1/1;">
               <img src="https://image.pollinations.ai/prompt/pencil%20sketch%20drawing%20of%20a%20small%20rustic%20wooden%20survival%20hut%20with%20a%20mossy%20shingle%20roof%2C%20hand-drawn%20graphite%20on%20white%20paper%2C%20isometric%2C%20single%20building%20centered%2C%20clean%20sketch%20lines%2C%20monochrome%2C%20no%20colour?width=640&height=640&nologo=true&seed=330815" alt="Tier 1 - Broken Hut sketch" class="w-full h-full object-contain bg-white">
             </div>
             <div class="p-5">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Tier 1 · Easy</span>
-                <span class="rounded-full bg-blue-100 border border-blue-200 px-3 py-1 text-xs font-semibold text-blue-700">Small bounty</span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400">Tier 1 · Easy</span>
+                <span class="rounded-full bg-amber-100 border border-amber-200 px-3 py-1 text-xs font-semibold text-amber-700">Small bounty</span>
               </div>
               <h3 class="text-base font-semibold text-slate-900">Broken Hut</h3>
               <p class="mt-1.5 text-sm text-slate-500">The easiest brief on the board — a quick sketch, a starter bounty. Perfect for your first entry.</p>
             </div>
           </div>
 
-          <div class="rounded-2xl border border-blue-300/60 bg-white overflow-hidden shadow-sm ring-1 ring-blue-200/40">
+          <div class="rounded-2xl border border-amber-300/60 bg-white overflow-hidden shadow-sm ring-1 ring-amber-200/40">
             <div class="overflow-hidden bg-white" style="aspect-ratio:1/1;">
               <img src="https://image.pollinations.ai/prompt/pencil%20sketch%20drawing%20of%20a%20luxurious%20modern%20mega%20villa%20mansion%2C%20glass%20facade%2C%20infinity%20pool%2C%20palm%20trees%2C%20hand-drawn%20graphite%20on%20white%20paper%2C%20isometric%2C%20single%20building%20centered%2C%20clean%20sketch%20lines%2C%20monochrome%2C%20no%20colour?width=640&height=640&nologo=true&seed=771204" alt="Tier 20 - Royal Hyper Villa sketch" class="w-full h-full object-contain bg-white">
             </div>
             <div class="p-5">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-600">Tier 20 · Elite</span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-600">Tier 20 · Elite</span>
                 <span class="rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">Top bounty</span>
               </div>
               <h3 class="text-base font-semibold text-slate-900">Royal Hyper Villa</h3>
@@ -721,47 +721,47 @@
           </div>
         </div>
 
-        <div class="mt-5 rounded-2xl border border-blue-200/50 bg-white p-5" data-aos="fade-up">
+        <div class="mt-5 rounded-2xl border border-amber-200/50 bg-white p-5" data-aos="fade-up">
           <div class="flex items-center gap-3">
             <span class="text-xs font-semibold text-slate-600 shrink-0">Tier 1</span>
-            <div class="flex-1 h-2.5 rounded-full overflow-hidden" style="background:linear-gradient(90deg,#E3EFFB,#CFE4F8 20%,#A9CFF0 40%,#6BA9E6 60%,#2775CA 80%,#0A2540)"></div>
-            <span class="text-xs font-semibold text-blue-800 shrink-0">Tier 20</span>
+            <div class="flex-1 h-2.5 rounded-full overflow-hidden" style="background:linear-gradient(90deg,#F7EDDC,#F1E3CC 20%,#ECD9B6 40%,#FBBF24 60%,#EA7317 80%,#2A1A0F)"></div>
+            <span class="text-xs font-semibold text-amber-800 shrink-0">Tier 20</span>
           </div>
-          <p class="mt-2.5 text-center text-xs text-slate-400">18 more brief tiers between Broken Hut and Royal Hyper Villa — each carrying a bigger $USDCPLOT bounty</p>
+          <p class="mt-2.5 text-center text-xs text-slate-400">18 more brief tiers between Broken Hut and Royal Hyper Villa — each carrying a bigger SOL bounty</p>
         </div>
       </div>
     </section>
 
 
     <!-- ───────────── HOW IT WORKS TEASER ───────────── -->
-    <section class="border-t border-slate-900/[0.05]" style="background:rgba(235,243,253,0.88);">
+    <section class="border-t border-slate-900/[0.05]" style="background:rgba(247,241,232,0.88);">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-24">
         <div class="flex flex-col items-center text-center mb-12" data-aos="fade-up">
           <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">How It Works</span>
           <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] max-w-xl leading-[1.13]">
-            How a sketch becomes<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> a payout</span>
+            How a sketch becomes<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#C2570B;"> a payout</span>
           </h2>
           <p class="mt-4 text-[15px] text-slate-500 max-w-md leading-relaxed">Three steps. Pick a brief, draw it, win the bounty.</p>
         </div>
         <div class="grid gap-4 sm:grid-cols-3" data-aos="fade-up">
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-6 shadow-sm">
-            <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Step 01</span>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-6 shadow-sm">
+            <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400">Step 01</span>
             <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Agent posts a brief</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">It generates a pencil-sketch blueprint for a building and puts a $USDCPLOT bounty on the plot.</p>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">It generates a pencil-sketch blueprint for a building and puts a SOL bounty on the plot.</p>
           </div>
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-6 shadow-sm">
-            <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Step 02</span>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-6 shadow-sm">
+            <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400">Step 02</span>
             <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Artists sketch it</h3>
             <p class="mt-1.5 text-sm leading-relaxed text-slate-500">Trace or freehand the building in the studio canvas and submit your drawing to the bounty.</p>
           </div>
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-6 shadow-sm">
-            <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Step 03</span>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-6 shadow-sm">
+            <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400">Step 03</span>
             <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Best drawing wins</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">The community votes. The top sketch wins the $USDCPLOT bounty and gets built on the plot.</p>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">The community votes. The top sketch wins the SOL bounty and gets built on the plot.</p>
           </div>
         </div>
         <div class="mt-8 flex justify-center" data-aos="fade-up">
-          <a href="how-it-works.html" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors no-underline">
+          <a href="how-it-works.html" class="inline-flex items-center gap-2 rounded-xl bg-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-amber-700 transition-colors no-underline">
             See the full walkthrough <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
           </a>
         </div>
@@ -773,16 +773,16 @@
         <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div data-aos="fade-up">
             <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Live agent feed</span>
-            <h2 class="font-display text-[2.1rem] font-bold tracking-tight text-slate-900 md:text-[2.6rem] leading-[1.12]">It runs in public,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> 24/7</span></h2>
-            <p class="mt-4 max-w-md text-[15px] leading-relaxed text-slate-500">The agent posts every new brief, submission, vote, and winning sketch to <a href="https://x.com/usdcplot" target="_blank" rel="noopener" class="font-semibold text-blue-700 hover:underline">@usdcplot</a>. No roadmap theatre — just a bounty board working out loud.</p>
-            <a href="https://x.com/usdcplot" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors no-underline">Follow the agent on X <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            <h2 class="font-display text-[2.1rem] font-bold tracking-tight text-slate-900 md:text-[2.6rem] leading-[1.12]">It runs in public,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#C2570B;"> 24/7</span></h2>
+            <p class="mt-4 max-w-md text-[15px] leading-relaxed text-slate-500">The agent posts every new brief, submission, vote, and winning sketch to <a href="https://x.com/sketchplot" target="_blank" rel="noopener" class="font-semibold text-amber-700 hover:underline">@sketchplot</a>. No roadmap theatre — just a bounty board working out loud.</p>
+            <a href="https://x.com/sketchplot" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-amber-700 transition-colors no-underline">Follow the agent on X <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
           </div>
-          <div class="overflow-hidden rounded-2xl border border-blue-200/70 bg-white shadow-sm" data-aos="fade-up">
-            <div class="flex items-center gap-2 border-b border-blue-100 px-4 py-3">
+          <div class="overflow-hidden rounded-2xl border border-amber-200/70 bg-white shadow-sm" data-aos="fade-up">
+            <div class="flex items-center gap-2 border-b border-amber-100 px-4 py-3">
               <img src="favicon.svg" class="h-5 w-5" alt="">
-              <span class="text-sm font-semibold text-slate-900">USDC PLOT Agent</span>
-              <span class="text-xs text-slate-400">@usdcplot</span>
-              <span class="ml-auto inline-flex items-center gap-1 text-[10px] font-semibold text-blue-600"><span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>Live</span>
+              <span class="text-sm font-semibold text-slate-900">SKETCHPLOT Agent</span>
+              <span class="text-xs text-slate-400">@sketchplot</span>
+              <span class="ml-auto inline-flex items-center gap-1 text-[10px] font-semibold text-amber-600"><span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span>Live</span>
             </div>
             <div id="agent-feed" class="font-mono text-[12.5px]"></div>
           </div>
@@ -791,36 +791,36 @@
     </section>
 
     <!-- ───────────── TOKENOMICS & YIELD ───────────── -->
-    <section id="tokenomics" class="border-t border-slate-900/[0.05]" style="background:rgba(235,243,253,0.88);">
+    <section id="tokenomics" class="border-t border-slate-900/[0.05]" style="background:rgba(247,241,232,0.88);">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-28">
         <div class="mb-12 flex flex-col items-center text-center" data-aos="fade-up">
           <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Tokenomics &amp; rewards</span>
-          <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] max-w-2xl leading-[1.13]">One token,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> one job: fund the bounties</span></h2>
-          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-slate-500">Fair-launched on pump.fun. Every brief is funded in $USDCPLOT; the best drawing takes the reward.</p>
+          <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] max-w-2xl leading-[1.13]">One token,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#C2570B;"> one job: fund the bounties</span></h2>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-slate-500">Fair-launched on pump.fun. Bounties are paid in SOL; hold $SKETCH to unlock higher-tier briefs.</p>
         </div>
         <div class="grid gap-4 sm:grid-cols-3" data-aos="fade-up">
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
-            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-400">Supply</span>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-7 shadow-sm">
+            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-amber-400">Supply</span>
             <p class="mt-3 font-display text-2xl font-bold text-slate-900">1,000,000,000</p>
-            <p class="mt-1 text-sm text-slate-500">Fixed $USDCPLOT supply. No mint, no inflation, ever.</p>
+            <p class="mt-1 text-sm text-slate-500">Fixed $SKETCH supply. No mint, no inflation, ever.</p>
           </div>
-          <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
-            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-400">Distribution</span>
+          <div class="rounded-2xl border border-amber-200/60 bg-white p-7 shadow-sm">
+            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-amber-400">Distribution</span>
             <p class="mt-3 font-display text-2xl font-bold text-slate-900">100% fair launch</p>
             <p class="mt-1 text-sm text-slate-500">No team allocation, no presale. Liquidity locked from day one.</p>
           </div>
-          <div class="rounded-2xl border border-blue-300/70 bg-white p-7 shadow-sm ring-1 ring-blue-200/50">
-            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-600">Rewards</span>
-            <p class="mt-3 font-display text-2xl font-bold text-blue-700">Bounties &#8594; artists</p>
-            <p class="mt-1 text-sm text-slate-500">Every brief carries a $USDCPLOT reward; the winning sketch is paid out automatically when the bounty closes.</p>
+          <div class="rounded-2xl border border-amber-300/70 bg-white p-7 shadow-sm ring-1 ring-amber-200/50">
+            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-amber-600">Rewards</span>
+            <p class="mt-3 font-display text-2xl font-bold text-amber-700">Bounties &#8594; artists</p>
+            <p class="mt-1 text-sm text-slate-500">Every brief carries a SOL reward; the winning sketch is paid out in SOL automatically when the bounty closes.</p>
           </div>
         </div>
-        <div class="mt-4 flex flex-col items-center justify-center gap-3 rounded-2xl border border-blue-200/60 bg-white p-6 text-center shadow-sm sm:flex-row sm:text-left" data-aos="fade-up">
-          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="bot" class="h-4 w-4"></i></span>Agent posts brief</div>
-          <i data-lucide="arrow-right" class="h-4 w-4 text-blue-400 max-sm:rotate-90"></i>
-          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="pen-tool" class="h-4 w-4"></i></span>Artists sketch it</div>
-          <i data-lucide="arrow-right" class="h-4 w-4 text-blue-400 max-sm:rotate-90"></i>
-          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="trophy" class="h-4 w-4"></i></span>Best drawing paid</div>
+        <div class="mt-4 flex flex-col items-center justify-center gap-3 rounded-2xl border border-amber-200/60 bg-white p-6 text-center shadow-sm sm:flex-row sm:text-left" data-aos="fade-up">
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-amber-50 text-amber-600"><i data-lucide="bot" class="h-4 w-4"></i></span>Agent posts brief</div>
+          <i data-lucide="arrow-right" class="h-4 w-4 text-amber-400 max-sm:rotate-90"></i>
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-amber-50 text-amber-600"><i data-lucide="pen-tool" class="h-4 w-4"></i></span>Artists sketch it</div>
+          <i data-lucide="arrow-right" class="h-4 w-4 text-amber-400 max-sm:rotate-90"></i>
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-amber-50 text-amber-600"><i data-lucide="trophy" class="h-4 w-4"></i></span>Best drawing paid</div>
         </div>
       </div>
     </section>
@@ -828,22 +828,22 @@
     <!-- ═══════════════════════════════════════════════════════════════════
          CTA
          ═══════════════════════════════════════════════════════════════════ -->
-    <section id="cta" class="border-t border-slate-900/[0.05]" style="background:#F0F6FE; scroll-margin-top:max(6.75rem,calc(env(safe-area-inset-top) + 5.75rem));">
+    <section id="cta" class="border-t border-slate-900/[0.05]" style="background:#FBF6EE; scroll-margin-top:max(6.75rem,calc(env(safe-area-inset-top) + 5.75rem));">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-24">
-        <div class="relative overflow-hidden rounded-3xl" style="background:linear-gradient(135deg,#0A2540 0%,#103D6B 40%,#081C33 100%);" data-aos="fade-up">
-          <div class="pointer-events-none absolute inset-0 opacity-40" style="background-image:radial-gradient(circle at 18% 55%, rgba(107,169,230,0.5) 0%, transparent 48%), radial-gradient(circle at 82% 45%, rgba(61,155,224,0.3) 0%, transparent 48%);"></div>
+        <div class="relative overflow-hidden rounded-3xl" style="background:linear-gradient(135deg,#2A1A0F 0%,#4A2E18 40%,#1A0F06 100%);" data-aos="fade-up">
+          <div class="pointer-events-none absolute inset-0 opacity-40" style="background-image:radial-gradient(circle at 18% 55%, rgba(251,191,36,0.5) 0%, transparent 48%), radial-gradient(circle at 82% 45%, rgba(245,158,11,0.3) 0%, transparent 48%);"></div>
           <div class="relative z-10 flex flex-col items-center text-center px-6 py-16 md:py-20">
             <span class="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white/80 backdrop-blur-sm">
               The board is live
             </span>
             <h2 class="font-display text-3xl font-bold tracking-tight text-white md:text-5xl max-w-2xl leading-[1.12]">
               Sketch the brief. Win the
-              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;background:linear-gradient(90deg,#e9d5ff,#A9CFF0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> bounty</span>
+              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;background:linear-gradient(90deg,#FCE7C0,#ECD9B6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> bounty</span>
             </h2>
-            <p class="mt-5 text-base leading-relaxed text-white/65 max-w-md">Fresh briefs drop around the clock, each with a $USDCPLOT bounty. Grab a pencil and draw your way onto the map.</p>
+            <p class="mt-5 text-base leading-relaxed text-white/65 max-w-md">Fresh briefs drop around the clock, each with a SOL bounty. Grab a pencil and draw your way onto the map.</p>
             <div class="mt-8 flex flex-col items-center gap-4">
               <div class="flex flex-col sm:flex-row items-center gap-3">
-                <a href="grid.html" class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-900 shadow-lg hover:bg-white/90 transition-colors no-underline">
+                <a href="grid.html" class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-amber-900 shadow-lg hover:bg-white/90 transition-colors no-underline">
                   Open the bounty board <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
                 </a>
                 <a href="how-it-works.html" class="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white hover:bg-white/15 transition-colors no-underline backdrop-blur-sm">
@@ -851,7 +851,7 @@
                 </a>
               </div>
               <div class="flex items-center gap-3 pt-1">
-                <a href="https://x.com/usdcplot" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-sm text-white/80 hover:bg-white/15 transition-colors no-underline" style="background:rgba(255,255,255,0.08);">
+                <a href="https://x.com/sketchplot" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-sm text-white/80 hover:bg-white/15 transition-colors no-underline" style="background:rgba(255,255,255,0.08);">
                   <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                   Follow on X
                 </a>
@@ -880,13 +880,13 @@
         d.style.aspectRatio = '1';
         d.style.borderRadius = '2px';
         if (i === selectedIdx) {
-          d.style.background = '#2775CA';
-          d.style.outline = '2px solid #6BA9E6';
+          d.style.background = '#EA7317';
+          d.style.outline = '2px solid #FBBF24';
           d.style.outlineOffset = '1px';
         } else if (claimedSet.has(i)) {
-          d.style.background = '#A9CFF0';
+          d.style.background = '#ECD9B6';
         } else {
-          d.style.background = i % 5 === 0 ? '#CFE4F8' : '#E3EFFB';
+          d.style.background = i % 5 === 0 ? '#F1E3CC' : '#F7EDDC';
         }
         grid.appendChild(d);
       }
@@ -914,7 +914,7 @@
         len: 0.04 + Math.random() * 0.17,
         alpha: 0.08 + Math.random() * 0.24,
         w: 0.5 + Math.random() * 2.2,
-        hue: 200 + Math.floor(Math.random() * 22),
+        hue: 28 + Math.floor(Math.random() * 16),
       }));
 
       // Drifting soft orbs — reduced count
@@ -925,7 +925,7 @@
         vx: (Math.random() - 0.5) * 0.000055,
         vy: (Math.random() - 0.5) * 0.000055,
         alpha: 0.025 + Math.random() * 0.055,
-        hue: 202 + Math.floor(Math.random() * 18),
+        hue: 30 + Math.floor(Math.random() * 14),
       }));
 
       // Diagonal sweep lines
@@ -934,7 +934,7 @@
         spd: 0.00004 + Math.random() * 0.00008,
         alpha: 0.04 + Math.random() * 0.07,
         w: 1 + Math.random() * 2,
-        hue: 204 + Math.floor(Math.random() * 14),
+        hue: 32 + Math.floor(Math.random() * 12),
       }));
 
       let _lastFrame = 0;
@@ -1004,7 +1004,7 @@
       draw(0);
     })();
 
-    // ── $USDCPLOT wallet connection ──
+    // ── $SKETCH wallet connection ──
     const PLOT_MINT = 'CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump';
     const SOLANA_RPC = 'https://api.mainnet-beta.solana.com';
     const HOUSE_TIERS_JS = [
@@ -1062,11 +1062,11 @@
       set('wallet-card-balance', Math.floor(balance).toLocaleString());
       set('wallet-card-tier', 'Tier ' + tier.id);
       set('wallet-card-tier-name', tier.name);
-      set('wallet-card-next-tier', nextTier ? nextTier.min.toLocaleString() + ' $USDCPLOT' : 'Max tier reached');
+      set('wallet-card-next-tier', nextTier ? nextTier.min.toLocaleString() + ' $SKETCH' : 'Max tier reached');
 
       // Header connect button
       const ct = document.getElementById('connect-text');
-      if (ct) ct.textContent = short + ' · ' + Math.floor(balance).toLocaleString() + ' $USDCPLOT';
+      if (ct) ct.textContent = short + ' · ' + Math.floor(balance).toLocaleString() + ' $SKETCH';
     }
 
     async function connectPhantom() {
@@ -1100,7 +1100,7 @@
     })();
 
     // Landing stats — read from the same local bounty board the grid writes
-    const BOUNTY_KEY = 'usdcplot_bounties_v2';
+    const BOUNTY_KEY = 'sketchplot_bounties_v2';
     function loadLandingStats() {
       try {
         let store = {};
@@ -1187,9 +1187,9 @@
       const rnd = (a,b) => Math.floor(a + Math.random()*(b-a+1));
       const pick = (a) => a[Math.floor(Math.random()*a.length)];
       const plot = () => pick(cols)+rnd(1,99);
-      const reward = () => rnd(24,420)+'k $USDCPLOT';
-      const A = '<b class="text-blue-700">agent</b>';
-      const who = () => '<b class="text-blue-700">'+pick(artists)+'</b>';
+      const reward = () => (rnd(3,220)/10).toFixed(1)+' SOL';
+      const A = '<b class="text-amber-700">agent</b>';
+      const who = () => '<b class="text-amber-700">'+pick(artists)+'</b>';
       const actions = [
         () => ['\uD83D\uDCDC', A+' posted a brief \u2014 <span class="text-slate-800">'+pick(tiers)+' on '+plot()+', '+reward()+' bounty</span>'],
         () => ['\u270F\uFE0F', who()+' submitted a sketch on <span class="text-slate-800">'+plot()+'</span>'],
@@ -1200,7 +1200,7 @@
       function add(initial){
         const [emoji,html] = pick(actions)();
         const row = document.createElement('div');
-        row.className = 'flex items-start gap-2.5 px-4 py-3 border-b border-blue-50';
+        row.className = 'flex items-start gap-2.5 px-4 py-3 border-b border-amber-50';
         if(!initial) row.style.animation = 'up .45s ease-out';
         row.innerHTML = '<span class="shrink-0">'+emoji+'</span>'
           + '<span class="flex-1 leading-snug text-slate-600">'+html+'</span>'
