@@ -14,16 +14,20 @@
     };
   }
 
-  // a wobbly hand-drawn line
+  // a wobbly hand-drawn line — drawn in 2 light passes so overlaps build a soft
+  // pencil/graphite look (not a single solid ballpoint stroke)
   function hline(ctx, x1, y1, x2, y2, hand, wob) {
-    var segs = Math.max(2, Math.round(Math.hypot(x2 - x1, y2 - y1) / 26));
-    ctx.beginPath();
-    for (var i = 0; i <= segs; i++) {
-      var t = i / segs, x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t;
-      if (i !== 0 && i !== segs) { x += (hand() - 0.5) * wob * 2; y += (hand() - 0.5) * wob * 2; }
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    var segs = Math.max(2, Math.round(Math.hypot(x2 - x1, y2 - y1) / 22));
+    for (var p = 0; p < 2; p++) {
+      var ox = (hand() - 0.5) * wob, oy = (hand() - 0.5) * wob;
+      ctx.beginPath();
+      for (var i = 0; i <= segs; i++) {
+        var t = i / segs, x = x1 + (x2 - x1) * t + ox, y = y1 + (y2 - y1) * t + oy;
+        if (i !== 0 && i !== segs) { x += (hand() - 0.5) * wob * 1.7; y += (hand() - 0.5) * wob * 1.7; }
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
     }
-    ctx.stroke();
   }
   function poly(ctx, pts, hand, wob) {
     for (var i = 0; i < pts.length - 1; i++) hline(ctx, pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], hand, wob);
@@ -35,10 +39,10 @@
     var W = canvas.width, H = canvas.height, ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = '#1c1917';
-    ctx.lineWidth = Math.max(2, W / 175);
+    ctx.strokeStyle = 'rgba(44,40,36,0.5)';   // soft graphite; overlaps build up = pencil, not ballpoint
+    ctx.lineWidth = Math.max(1.1, W / 250);
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    var wob = opts.rough ? 3.2 : 1.5;
+    var wob = opts.rough ? 3.4 : 1.9;
 
     var diff = opts.diff || 'Medium';
     var cx = W / 2, baseY = H * 0.80;

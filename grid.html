@@ -79,9 +79,9 @@
       border:1px solid #ddccab;background:#fff;touch-action:none}
     #canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
     /* brief reference: only a small, blurred glimpse is revealed — can't be copied 1:1 */
-    #brief-img{filter:blur(6px) contrast(1.05);transform:scale(1.06);opacity:.95;
-      -webkit-mask-image:radial-gradient(circle at 50% 54%, #000 0, #000 21%, transparent 45%);
-      mask-image:radial-gradient(circle at 50% 54%, #000 0, #000 21%, transparent 45%)}
+    #brief-img{filter:blur(10px) contrast(1.04);transform:scale(1.04);opacity:.8;
+      -webkit-mask-image:radial-gradient(circle at 50% 55%, #000 0, #000 9%, transparent 26%);
+      mask-image:radial-gradient(circle at 50% 55%, #000 0, #000 9%, transparent 26%)}
     .swatch{width:22px;height:22px;border-radius:9999px;border:2px solid #fff;
       box-shadow:0 0 0 1px rgba(28,25,23,.18);cursor:pointer}
     .swatch.on{box-shadow:0 0 0 2px var(--accent)}
@@ -228,7 +228,7 @@
         <div class="mt-7 border-t border-amber-100 pt-5">
           <div class="flex items-center justify-between">
             <h3 class="text-sm font-bold text-stone-900 inline-flex items-center gap-2"><i data-lucide="trophy" class="h-4 w-4 text-amber-500"></i> Submissions &amp; votes</h3>
-            <button id="crown-btn" onclick="crownWinner()" class="hidden inline-flex items-center gap-1.5 rounded-xl bg-amber-500 px-3.5 py-2 text-xs font-semibold text-white hover:bg-amber-600 transition"><i data-lucide="crown" class="h-3.5 w-3.5"></i> Crown winner &amp; build on plot</button>
+            <span class="text-[11px] text-stone-400">Most votes wins when the bounty closes</span>
           </div>
           <div id="leaderboard" class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
         </div>
@@ -417,7 +417,6 @@
         </div>
       </div>`;
     }).join('') || '<p class="col-span-full text-center text-xs text-stone-400 py-6">No submissions yet.</p>';
-    document.getElementById('crown-btn').classList.toggle('hidden', b.subs.length===0);
     lucide.createIcons();
   }
 
@@ -426,20 +425,6 @@
     const s=b.subs.find(x=>x.id===id); if(!s) return;
     s.votes++; b.voted.push(id); saveStore(); renderLeaderboard();
     toast('▲ Vote counted');
-  }
-
-  function crownWinner(){
-    const b=store[cur]; if(!b.subs.length) return;
-    const win=[...b.subs].sort((p,q)=>q.votes-p.votes)[0];
-    const wimg = win.img || rivalImg(b, win.hand);
-    b.status='built'; b.winner=win.id; b.winnerArtist=win.artist;
-    b.winnerSketch=wimg; b.winnerVotes=win.votes;
-    b.winnerOwner = win.mine ? (owner||'guest') : null;
-    b.builtImg = wimg;   // the winning SKETCH is placed on the plot
-    saveStore(); updateTile(cur); refreshStats();
-    toast(`🏆 ${win.artist} won bounty #${b.id} — ${b.reward} SOL paid`);
-    closeModal();
-    openDetail(cur);
   }
 
   /* ───────────────── drawing canvas (draw here, or on paper) ───────────────── */
