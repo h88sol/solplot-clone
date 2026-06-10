@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SKETCHPLOT — Sketch Bounties</title>
+  <title>SketchBounties — Sketch Bounties</title>
   <meta name="description" content="The agent posts a build brief on a plot. You only get a glimpse — sketch the rest. Best drawing wins the SOL bounty and gets built on the plot." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="sketch.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -77,10 +78,10 @@
     #draw-wrap{position:relative;width:100%;aspect-ratio:1/1;border-radius:1rem;overflow:hidden;
       border:1px solid #ddccab;background:#fff;touch-action:none}
     #canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
-    /* brief reference: only a small, blurred glimpse is revealed — can't be traced 1:1 */
-    #brief-img{filter:blur(7px) contrast(1.05);transform:scale(1.08);opacity:.92;
-      -webkit-mask-image:radial-gradient(circle at 50% 52%, #000 0, #000 20%, transparent 44%);
-      mask-image:radial-gradient(circle at 50% 52%, #000 0, #000 20%, transparent 44%)}
+    /* brief reference: only a small, blurred glimpse is revealed — can't be copied 1:1 */
+    #brief-img{filter:blur(6px) contrast(1.05);transform:scale(1.06);opacity:.95;
+      -webkit-mask-image:radial-gradient(circle at 50% 54%, #000 0, #000 21%, transparent 45%);
+      mask-image:radial-gradient(circle at 50% 54%, #000 0, #000 21%, transparent 45%)}
     .swatch{width:22px;height:22px;border-radius:9999px;border:2px solid #fff;
       box-shadow:0 0 0 1px rgba(28,25,23,.18);cursor:pointer}
     .swatch.on{box-shadow:0 0 0 2px var(--accent)}
@@ -95,14 +96,14 @@
          style="box-shadow:0 4px 30px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.6);">
       <a href="index.html" class="inline-flex items-center gap-2">
         <img src="favicon.svg" class="h-[26px] w-[26px] object-contain" alt="" />
-        <span class="brand font-bold tracking-tight text-[#1c1917] text-lg">SKETCHPLOT</span>
-        <span class="ml-1.5 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[10px] font-semibold text-amber-700">Sketch Bounties</span>
+        <span class="brand font-bold tracking-tight text-[#1c1917] text-lg">SketchBounties</span>
+        <span class="ml-1.5 rounded-full bg-amber-100 border border-amber-200 px-2 py-0.5 text-[10px] font-semibold text-amber-700">Draw-to-earn</span>
       </a>
       <div class="flex items-center gap-2">
         <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white/70 px-3 py-2 text-sm font-medium text-stone-600 hover:bg-white transition">
           <i data-lucide="arrow-left" class="h-4 w-4"></i> Home
         </a>
-        <a href="https://x.com/sketchplot" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-amber-200 bg-white text-stone-700 hover:bg-amber-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://x.com/sketchbounties" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-amber-200 bg-white text-stone-700 hover:bg-amber-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         <button id="connect-btn" onclick="connectPhantom()" class="accent-cta h-[38px] min-w-[150px] px-4 text-[15px] font-medium">
           <img src="https://cdn.brandfetch.io/idf5VaJxyT/theme/light/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" class="h-[18px] w-[18px] brightness-0 invert" alt="" />
           <span id="connect-text">Connect Phantom</span>
@@ -153,7 +154,7 @@
   </main>
 
   <footer class="border-t border-stone-900/[0.05] py-8 text-center text-xs text-stone-400">
-    SKETCHPLOT · AI virtual real estate · sketch the brief, best drawing wins SOL · saved on your device for this demo
+    SketchBounties · AI virtual real estate · sketch the brief, best drawing wins SOL · saved on your device for this demo
   </footer>
 
   <!-- ============ BOUNTY / STUDIO MODAL ============ -->
@@ -186,7 +187,7 @@
             <div class="mt-2 relative aspect-square w-full overflow-hidden rounded-2xl border border-amber-100 bg-white grid place-items-center">
               <div id="brief-loading" class="text-center">
                 <i data-lucide="loader-2" class="mx-auto h-9 w-9 text-amber-500 spin"></i>
-                <p class="mt-2 text-xs text-stone-500">Agent is drafting the brief…</p>
+                <p class="mt-2 text-xs text-stone-500">Drafting the brief…</p>
               </div>
               <img id="brief-img" class="hidden absolute inset-0 h-full w-full object-contain bg-white" alt="Build brief glimpse" />
               <span class="absolute bottom-2 left-2 rounded-lg bg-stone-900/80 px-2.5 py-1 text-[10px] font-bold text-white">Only a glimpse · sketch the rest yourself</span>
@@ -202,9 +203,9 @@
             </div>
           </div>
 
-          <!-- RIGHT: drawing studio -->
+          <!-- RIGHT: drawing studio (draw here, or on real paper) -->
           <div>
-            <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">Your sketch</label>
+            <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-stone-400">Your sketch — on screen or on paper</label>
             <div id="draw-wrap" class="mt-2">
               <canvas id="canvas" width="560" height="560"></canvas>
             </div>
@@ -218,13 +219,8 @@
               </div>
               <button id="eraser-btn" onclick="toggleEraser()" class="inline-flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"><i data-lucide="eraser" class="h-3.5 w-3.5"></i> Eraser</button>
               <button onclick="undoDraw()" class="inline-flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"><i data-lucide="undo-2" class="h-3.5 w-3.5"></i> Undo</button>
-              <button onclick="clearDraw()" class="inline-flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50"><i data-lucide="trash-2" class="h-3.5 w-3.5"></i> Clear</button>
-              <span class="ml-auto text-[11px] text-stone-400">Or draw it on paper &amp; judge by eye</span>
+              <span class="ml-auto text-[11px] text-stone-400">Prefer paper? Draw it by hand — winners are judged by eye.</span>
             </div>
-            <button id="submit-btn" onclick="submitSketch()" class="accent-cta mt-3 w-full px-4 py-2.5 text-sm font-semibold">
-              <i data-lucide="upload" class="h-4 w-4"></i> Submit my sketch to the bounty
-            </button>
-            <p class="mt-1.5 text-center text-[11px] text-stone-400">An on-chain judge scores effort; the community votes. Most votes wins the SOL.</p>
           </div>
         </div>
 
@@ -278,7 +274,7 @@
     {name:"Beachfront Villa",diff:"Hard",base:"a beachfront villa with an infinity pool and palm trees"},
     {name:"Mountain Estate",diff:"Hard",base:"a grand mountain estate of stone and timber"},
     {name:"Mega Mansion",diff:"Elite",base:"a sprawling mega mansion compound with multiple wings"},
-    {name:"Royal Hyper Villa",diff:"Elite",base:"an ultra-luxurious royal palace villa with gold accents and supercars"},
+    {name:"Royal Hyper Villa",diff:"Elite",base:"an ultra-luxurious royal palace villa with gold accents"},
     {name:"Cyber Tower",diff:"Elite",base:"a futuristic neon cyberpunk residential tower"},
   ];
   const STYLES = ["Modern","Classic","Futuristic","Cyberpunk","Cozy","Fantasy","Brutalist","Art Deco"];
@@ -301,35 +297,25 @@
   function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
   function pickN(arr,n){ const c=[...arr]; const out=[]; while(out.length<n&&c.length) out.push(c.splice(Math.floor(Math.random()*c.length),1)[0]); return out; }
 
-  /* ───────────────── reference generation (different every time) ───────────────── */
-  // Everything generated is a pencil/graphite SKETCH on white paper — never a colour 3D render.
-  function blueprintUrl(base,style,seed){
-    const p = `pencil sketch drawing of ${base}, ${style.toLowerCase()} architecture, hand-drawn graphite on white paper, isometric, single building centered, clean detailed sketch lines, monochrome, no colour`;
-    return `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=560&height=560&nologo=true&seed=${seed}`;
-  }
-  function sketchUrl(base,style,seed){
-    const p = `rough pencil sketch doodle of ${base}, ${style.toLowerCase()}, hand drawn on white paper, sketchy graphite lines, loose isometric drawing, monochrome, no colour`;
-    return `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=400&height=400&nologo=true&seed=${seed}`;
-  }
+  // sketch helpers — all images are generated locally (sketch.js), no network
+  function briefImg(b){ return sketchDataURL(b.seed, {diff:b.diff, size:440}); }
+  function rivalImg(b, hand){ return sketchDataURL(b.seed, {diff:b.diff, rough:true, hand:hand, size:360}); }
 
   function makeBounty(k){
     const b = pick(BUILDINGS), style = pick(STYLES), extra = pick(EXTRAS);
     const seed = rnd(1,9999999);
-    // reward paid in SOL, scaled by difficulty
     const range = {Easy:[0.4,1.8],Medium:[1.5,4.5],Hard:[3,9],Elite:[8,24]}[b.diff];
-    const reward = +(range[0] + Math.random()*(range[1]-range[0])).toFixed(1);
-    // seed 1-3 rival submissions so "best wins" is competitive
+    const reward = +(range[0] + Math.random()*(range[1]-range[0])).toFixed(1);   // SOL
+    // seed 1-3 rival submissions (same building, different hand) so "best wins" is competitive
     const rivalCount = rnd(1,3);
     const subs = pickN(RIVALS, rivalCount).map((name,i)=>({
       id:'r'+seed+'_'+i, artist:name, mine:false,
-      img: sketchUrl(b.base, style, seed+100+i), votes: rnd(2,34), ts: Date.now()-rnd(1,80)*60000
+      hand: seed + 137*(i+1), votes: rnd(2,34), ts: Date.now()-rnd(1,80)*60000
     }));
     return {
       id: seq++, x:keyToXY(k).x, y:keyToXY(k).y,
       base:b.base, name:b.name, diff:b.diff, style, extra, seed, reward,
-      brief: blueprintUrl(b.base, style, seed),
-      status:'open', winner:null, builtImg:null,
-      subs, voted:[]
+      status:'open', winner:null, builtImg:null, subs, voted:[]
     };
   }
 
@@ -385,24 +371,6 @@
     gridEl.querySelector(`[data-k="${k}"]`)?.scrollIntoView({block:'center',inline:'center',behavior:'smooth'});
   }
 
-  /* ───────────────── brief glimpse loader (robust against Pollinations hiccups) ───────────────── */
-  let curBriefUrl=null;
-  function loadBrief(url){
-    if(url) curBriefUrl=url;
-    const bi=document.getElementById('brief-img'), bl=document.getElementById('brief-loading');
-    bi.classList.add('hidden');
-    bl.classList.remove('hidden'); bl.dataset.try='0';
-    bl.innerHTML='<i data-lucide="loader-2" class="mx-auto h-9 w-9 text-amber-500 spin"></i><p class="mt-2 text-xs text-stone-500">Agent is drafting the brief…</p>';
-    lucide.createIcons();
-    bi.onload=()=>{ bi.classList.remove('hidden'); bl.classList.add('hidden'); };
-    bi.onerror=()=>{
-      const n=(+bl.dataset.try)+1; bl.dataset.try=n;
-      if(n<=4){ setTimeout(()=>{ bi.src=curBriefUrl+'&r='+n; }, 900+n*450); }
-      else { bl.innerHTML='<button onclick="loadBrief()" class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700">Brief slow — tap to retry</button>'; lucide.createIcons(); }
-    };
-    bi.src=curBriefUrl;
-  }
-
   /* ───────────────── modal ───────────────── */
   const modal=document.getElementById('modal');
   function openModal(k){
@@ -414,7 +382,11 @@
     document.getElementById('brief-style').textContent=b.style;
     document.getElementById('brief-desc').textContent=`Sketch ${b.base} ${b.extra}. You only get a glimpse — fill in the rest from imagination. The winning drawing gets placed on this plot.`;
     const diffEl=document.getElementById('brief-diff'); diffEl.textContent=b.diff; diffEl.className=(DIFF_COLOR[b.diff]||'')+' font-semibold';
-    loadBrief(b.brief);
+    // brief glimpse — generated locally, instant
+    const bi=document.getElementById('brief-img'), bl=document.getElementById('brief-loading');
+    bi.classList.add('hidden'); bl.classList.remove('hidden');
+    bi.onload=()=>{ bi.classList.remove('hidden'); bl.classList.add('hidden'); };
+    bi.src=briefImg(b);
     clearDraw(true);
     renderLeaderboard();
     modal.classList.remove('hidden'); modal.classList.add('flex');
@@ -430,9 +402,10 @@
     lb.innerHTML = sorted.map((s)=>{
       const lead = top && s.id===top.id && b.subs.length>0;
       const voted = b.voted.includes(s.id);
+      const img = s.img || rivalImg(b, s.hand);
       return `<div class="rounded-2xl border ${lead?'border-amber-300 ring-1 ring-amber-200':'border-amber-100'} bg-white overflow-hidden">
         <div class="relative aspect-square bg-white">
-          <img src="${s.img}" onerror="this.style.opacity=.12" class="h-full w-full object-contain bg-white" alt=""/>
+          <img src="${img}" class="h-full w-full object-contain bg-white" alt=""/>
           ${lead?'<span class="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5z"/></svg>Leading</span>':''}
           ${s.mine?'<span class="absolute top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-bold text-white">You</span>':''}
         </div>
@@ -443,7 +416,7 @@
           </button>
         </div>
       </div>`;
-    }).join('') || '<p class="col-span-full text-center text-xs text-stone-400 py-6">No submissions yet — be the first to sketch this brief.</p>';
+    }).join('') || '<p class="col-span-full text-center text-xs text-stone-400 py-6">No submissions yet.</p>';
     document.getElementById('crown-btn').classList.toggle('hidden', b.subs.length===0);
     lucide.createIcons();
   }
@@ -458,20 +431,21 @@
   function crownWinner(){
     const b=store[cur]; if(!b.subs.length) return;
     const win=[...b.subs].sort((p,q)=>q.votes-p.votes)[0];
+    const wimg = win.img || rivalImg(b, win.hand);
     b.status='built'; b.winner=win.id; b.winnerArtist=win.artist;
-    b.winnerSketch=win.img; b.winnerVotes=win.votes;
+    b.winnerSketch=wimg; b.winnerVotes=win.votes;
     b.winnerOwner = win.mine ? (owner||'guest') : null;
-    b.builtImg = win.img;   // the winning SKETCH is placed on the plot — no 3D render
+    b.builtImg = wimg;   // the winning SKETCH is placed on the plot
     saveStore(); updateTile(cur); refreshStats();
     toast(`🏆 ${win.artist} won bounty #${b.id} — ${b.reward} SOL paid`);
     closeModal();
     openDetail(cur);
   }
 
-  /* ───────────────── drawing canvas ───────────────── */
+  /* ───────────────── drawing canvas (draw here, or on paper) ───────────────── */
   const canvas=document.getElementById('canvas');
   const ctx=canvas.getContext('2d');
-  let drawing=false, color='#1c1917', size=4, eraser=false, strokes=0;
+  let drawing=false, color='#1c1917', size=4, eraser=false;
   let undoStack=[];
   const COLORS=['#1c1917','#EA7317','#ef4444','#22c55e','#f59e0b','#8b5cf6','#0f172a','#a8a29e'];
 
@@ -489,7 +463,7 @@
   function clearDraw(silent){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    undoStack=[]; strokes=0; if(!silent) toast('Canvas cleared');
+    undoStack=[]; if(!silent) toast('Canvas cleared');
   }
   function undoDraw(){ if(!undoStack.length) return; ctx.putImageData(undoStack.pop(),0,0); }
   function toggleEraser(){
@@ -505,7 +479,7 @@
     const cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
     return {x:cx*(canvas.width/r.width), y:cy*(canvas.height/r.height)};
   }
-  function start(e){ e.preventDefault(); drawing=true; pushUndo(); strokes++; const p=pos(e);
+  function start(e){ e.preventDefault(); drawing=true; pushUndo(); const p=pos(e);
     ctx.beginPath(); ctx.moveTo(p.x,p.y); stroke(e); }
   function stroke(e){
     if(!drawing) return; e.preventDefault(); const p=pos(e);
@@ -518,30 +492,6 @@
   canvas.addEventListener('pointerdown',start);
   canvas.addEventListener('pointermove',stroke);
   window.addEventListener('pointerup',end);
-
-  function judgeScore(){
-    let nonwhite=0;
-    try{
-      const d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
-      for(let i=0;i<d.length;i+=64){ if(d[i]<240||d[i+1]<240||d[i+2]<240) nonwhite++; }
-    }catch{}
-    const coverage=nonwhite/(canvas.width*canvas.height/64);
-    return Math.max(0, Math.min(60, Math.round(coverage*180 + strokes*1.5)));
-  }
-
-  function submitSketch(){
-    const b=store[cur]; if(!b) return;
-    if(strokes<2){ toast('Draw something first ✏️'); return; }
-    const tmp=document.createElement('canvas'); tmp.width=canvas.width; tmp.height=canvas.height;
-    const tc=tmp.getContext('2d'); tc.fillStyle='#fff'; tc.fillRect(0,0,tmp.width,tmp.height); tc.drawImage(canvas,0,0);
-    const data=tmp.toDataURL('image/png');
-    const score=judgeScore();
-    const id='m'+b.id+'_'+Date.now();
-    b.subs.push({ id, artist: owner?('you · '+owner):'you', mine:true, img:data, votes:score, ts:Date.now() });
-    b.voted.push(id);
-    saveStore(); renderLeaderboard();
-    toast(`🤖 Judge scored your effort: ${score} votes`);
-  }
 
   /* ───────────────── detail (built) ───────────────── */
   function openDetail(k){
