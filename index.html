@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USDC PLOT — Virtual Real Estate on USDC</title>
-  <meta name="description" content="An autonomous AI agent that buys, builds, and rents on-chain real estate — and pays the rent to $USDCPLOT holders in USDC." />
-  <meta property="og:title" content="USDC PLOT — Virtual Real Estate on USDC" />
-  <meta property="og:description" content="An autonomous AI agent that buys, builds, and rents on-chain real estate — and pays the rent to $USDCPLOT holders in USDC." />
+  <title>USDC PLOT — Sketch-to-Earn Virtual Real Estate</title>
+  <meta name="description" content="The AI agent posts a build brief on every plot. Sketch the building it wants — the best drawing wins the $USDCPLOT bounty and gets built on the plot." />
+  <meta property="og:title" content="USDC PLOT — Sketch-to-Earn Virtual Real Estate" />
+  <meta property="og:description" content="The AI agent posts a build brief on every plot. Sketch the building — the best drawing wins the $USDCPLOT bounty and gets built on the plot." />
   <meta property="og:url" content="https://solplot-clone.vercel.app" />
   <meta property="og:site_name" content="USDC PLOT" />
   <meta property="og:type" content="website" />
@@ -16,8 +16,8 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="USDC PLOT" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="USDC PLOT — Virtual Real Estate on USDC" />
-  <meta name="twitter:description" content="An autonomous AI agent that buys, builds, and rents on-chain real estate — and pays the rent to $USDCPLOT holders in USDC." />
+  <meta name="twitter:title" content="USDC PLOT — Sketch-to-Earn Virtual Real Estate" />
+  <meta name="twitter:description" content="The AI agent posts a build brief on every plot. Sketch the building — the best drawing wins the $USDCPLOT bounty and gets built on the plot." />
   <meta name="twitter:image" content="/og-image.png" />
 
   <!-- Tailwind CSS CDN -->
@@ -341,8 +341,7 @@
         <!-- Desktop Nav -->
         <nav class="hidden items-center gap-1 md:flex">
           <a href="how-it-works.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-slate-900 transition-colors no-underline">How It Works</a>
-          <a href="faq.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-slate-900 transition-colors no-underline">FAQ</a>
-        <a href="grid.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-slate-900 transition-colors no-underline">Open Grid</a>
+        <a href="grid.html" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-slate-900 transition-colors no-underline">Bounty Board</a>
         </nav>
 
         <!-- Right side -->
@@ -364,8 +363,7 @@
       <!-- Mobile menu -->
       <div id="m-menu" class="hidden border-t border-blue-100 bg-white px-5 py-3 md:hidden">
         <a href="how-it-works.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-50 no-underline">How It Works</a>
-        <a href="faq.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-50 no-underline">FAQ</a>
-        <a href="grid.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-50 no-underline">Open Grid</a>
+        <a href="grid.html" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-50 no-underline">Bounty Board</a>
       <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var t=b.querySelector('.buy-t');var o=t.textContent;t.textContent='Copied CA!';setTimeout(function(){t.textContent=o;},1500);})(this)" class="mt-1 block w-full rounded-lg bg-blue-600 px-3 py-2.5 text-left text-sm font-semibold text-white"><span class="buy-t">Buy $USDCPLOT</span></button>
       </div>
     </header>
@@ -395,22 +393,22 @@
           <!-- Left: copy -->
           <div class="text-center lg:text-left">
             <span class="anim-up mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-medium text-blue-700 backdrop-blur-sm" style="animation-delay:.05s">
-              <span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span> Autonomous · on-chain · self-running
+              <span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span> Draw-to-earn · on-chain · sketch bounties
             </span>
             <h1 class="anim-up font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-[3.25rem] lg:text-[3.7rem]" style="animation-delay:.14s">
-              Autonomous AI real estate, paying
-              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;">rent in USDC</span>
+              Sketch the building, win the
+              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;">bounty</span>
             </h1>
             <p class="anim-up mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg lg:mx-0" style="animation-delay:.22s">
-              <span class="font-semibold text-blue-700">$USDCPLOT</span> is an autonomous on-chain agent that buys, builds, and rents a pool of virtual plots — 24/7, no humans.
-              Every dollar of rent it collects flows back to holders as USDC yield.
+              <span class="font-semibold text-blue-700">$USDCPLOT</span> is an AI real-estate agent that posts a build brief on every plot — a pencil-sketch blueprint plus a bounty.
+              Draw the building it wants; the best drawing wins the reward and gets built on the map.
             </p>
             <div class="anim-up mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start" style="animation-delay:.3s">
               <button type="button" onclick="(function(b){navigator.clipboard.writeText('CVJer8SsnM8gQz4uHd5gF4DWZ3ZFi7rzvBY4N537pump');var s=b.querySelector('.cta-t');var o=s.textContent;s.textContent='Copied CA!';setTimeout(function(){s.textContent=o;},1500);})(this)" class="purple-cta-base h-12 px-6 text-base font-medium">
                 <span class="relative z-[1] flex items-center gap-2"><span class="cta-t text-white">Buy $USDCPLOT</span><i data-lucide="copy" class="h-4 w-4 text-white"></i></span>
               </button>
               <a href="grid.html" class="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white px-6 text-base font-medium text-slate-700 hover:bg-blue-50 transition-colors no-underline">
-                Watch the Agent
+                Open the bounty board
               </a>
             </div>
             <div class="anim-up mt-6 flex items-center justify-center gap-1.5 lg:justify-start" style="animation-delay:.36s">
@@ -430,7 +428,7 @@
                 <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
                 <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
                 <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-                <span class="ml-2 flex-1 truncate rounded-md bg-blue-50 px-3 py-1 text-center font-mono text-[11px] text-slate-400">the agent · live portfolio</span>
+                <span class="ml-2 flex-1 truncate rounded-md bg-blue-50 px-3 py-1 text-center font-mono text-[11px] text-slate-400">the agent · live bounty board</span>
                 <span class="inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold text-blue-600"><span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>Live</span>
               </div>
               <div style="aspect-ratio:1/1;"><iframe src="grid.html" class="h-full w-full border-0" loading="lazy" title="USDC PLOT live grid"></iframe></div>
@@ -447,19 +445,19 @@
         <div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-blue-200/60 bg-blue-100/70 shadow-sm sm:grid-cols-4">
           <div class="bg-white px-5 py-6 text-center">
             <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl" data-count="10000">10,000</div>
-            <div class="mt-1 text-xs font-medium text-slate-500">Plots managed</div>
+            <div class="mt-1 text-xs font-medium text-slate-500">Plots on the map</div>
           </div>
           <div class="bg-white px-5 py-6 text-center">
-            <div class="font-display text-2xl font-bold text-blue-700 md:text-3xl" id="stat-claimed">0</div>
-            <div class="mt-1 text-xs font-medium text-slate-500">Rented out</div>
+            <div class="font-display text-2xl font-bold text-amber-600 md:text-3xl" id="stat-claimed">0</div>
+            <div class="mt-1 text-xs font-medium text-slate-500">Bounties posted</div>
           </div>
           <div class="bg-white px-5 py-6 text-center">
             <div class="font-display text-2xl font-bold text-blue-700 md:text-3xl" id="stat-buildings">0</div>
-            <div class="mt-1 text-xs font-medium text-slate-500">Buildings built</div>
+            <div class="mt-1 text-xs font-medium text-slate-500">Sketches built</div>
           </div>
           <div class="bg-white px-5 py-6 text-center">
-            <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl">USDC</div>
-            <div class="mt-1 text-xs font-medium text-slate-500">Yield paid in</div>
+            <div class="font-display text-2xl font-bold text-slate-900 md:text-3xl">$USDCPLOT</div>
+            <div class="mt-1 text-xs font-medium text-slate-500">Bounties paid in</div>
           </div>
         </div>
       </div>
@@ -477,10 +475,10 @@
           </span>
           <h2 class="font-display text-[2.3rem] font-bold tracking-tight text-slate-900 md:text-5xl max-w-3xl leading-[1.12]">
             One agent runs the entire
-            <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:#1f63ad;"> on-chain market</span>
+            <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:#1f63ad;"> bounty board</span>
           </h2>
           <p class="mt-5 text-[15px] text-slate-500 max-w-lg leading-relaxed">
-            A living world on-chain. Claim tiles, generate AI homes, and hold <strong class="font-semibold text-blue-700">$USDCPLOT</strong> to unlock premium building tiers.
+            A living world on-chain. Open a brief, sketch the building, and win <strong class="font-semibold text-blue-700">$USDCPLOT</strong> when your drawing gets the most votes.
           </p>
         </div>
 
@@ -490,13 +488,13 @@
           <!-- Claim tile card -->
           <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up">
             <div class="p-7 pb-0">
-              <h3 class="text-[20px] font-semibold text-slate-900">The agent's live world grid</h3>
-              <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">Pick a coordinate on the shared 100×100 map. Once claimed, your wallet owns it permanently.</p>
+              <h3 class="text-[20px] font-semibold text-slate-900">The agent's live bounty board</h3>
+              <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">Pick a plot on the shared 100×100 map. Each one carries a fresh build brief and a $USDCPLOT bounty to sketch for.</p>
             </div>
             <div class="p-5">
               <div class="rounded-xl border border-blue-100 overflow-hidden bg-white shadow-sm">
                 <div class="flex items-center justify-between px-4 py-2.5 border-b border-blue-100">
-                  <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">Live World Grid</span>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">Live Bounty Board</span>
                   <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-100 px-2.5 py-1 text-[10px] font-semibold text-blue-700">
                     <span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
                     <span id="mini-grid-stat">Live</span>
@@ -516,32 +514,32 @@
           <!-- AI Builder card -->
           <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="80">
             <div class="p-7 pb-0">
-              <h3 class="text-[20px] font-semibold text-slate-900">The agent builds on every plot</h3>
-              <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">Choose a style, pick your tier, and let AI render a unique building for your plot in seconds.</p>
+              <h3 class="text-[20px] font-semibold text-slate-900">Sketch the brief in the studio</h3>
+              <p class="mt-2.5 text-sm text-slate-600 max-w-[300px] leading-relaxed">The agent hands you a pencil-sketch blueprint. Trace it or freehand it on the canvas, then submit your drawing to the bounty.</p>
             </div>
             <div class="p-5">
               <div class="rounded-xl border border-blue-100 bg-white p-4 shadow-sm">
-                <!-- Building type selector -->
-                <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">Building Type</p>
-                <div class="flex items-center justify-between rounded-lg border border-blue-300 bg-blue-50 px-3 py-2 mb-3">
+                <!-- Brief selector -->
+                <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">Build Brief</p>
+                <div class="flex items-center justify-between rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 mb-3">
                   <div class="flex items-center gap-2">
-                    <span class="h-2 w-2 rounded-full bg-blue-600 shrink-0"></span>
-                    <span class="text-[12px] font-semibold text-blue-900">Luxury Villa</span>
+                    <span class="h-2 w-2 rounded-full bg-amber-500 shrink-0"></span>
+                    <span class="text-[12px] font-semibold text-amber-900">Beachfront Villa · Modern</span>
                   </div>
-                  <span class="rounded-full bg-blue-600 px-2.5 py-0.5 text-[10px] font-bold text-white shrink-0">15,000 $USDCPLOT</span>
+                  <span class="rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-bold text-white shrink-0">132,000 $USDCPLOT</span>
                 </div>
-                <!-- Custom prompt -->
-                <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">Custom Prompt</p>
+                <!-- Brief note -->
+                <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">The Brief</p>
                 <div class="rounded-lg border border-blue-100 bg-[#F0F6FE] px-3 py-2 mb-3">
-                  <span class="text-[11px] italic text-slate-500">"add a luxury car and graffiti pumper"</span>
+                  <span class="text-[11px] italic text-slate-500">"sketch this villa — best drawing wins the bounty"</span>
                 </div>
-                <!-- AI result image -->
-                <div class="relative overflow-hidden rounded-xl" style="aspect-ratio:1/1;">
-                  <img src="https://image.pollinations.ai/prompt/isometric%203d%20render%20of%20a%20luxurious%20modern%20mega%20villa%20mansion%2C%20glass%20facade%2C%20infinity%20pool%2C%20palm%20trees%2C%20a%20blue%20sports%20car%20in%20the%20driveway%2C%20bright%20clear%20day%2C%20single%20building%2C%20centered%2C%20high%20detail%2C%20vibrant?width=640&height=640&nologo=true&seed=771204" alt="Generated Luxury Villa" class="absolute inset-0 w-full h-full object-cover">
-                  <span class="absolute bottom-2 right-2 rounded-lg bg-blue-700/90 px-2.5 py-1 text-[10px] font-bold text-white">Generated</span>
+                <!-- Pencil-sketch reference -->
+                <div class="relative overflow-hidden rounded-xl bg-white" style="aspect-ratio:1/1;">
+                  <img src="https://image.pollinations.ai/prompt/pencil%20sketch%20drawing%20of%20a%20beachfront%20villa%20with%20an%20infinity%20pool%20and%20palm%20trees%2C%20modern%20architecture%2C%20hand-drawn%20graphite%20on%20white%20paper%2C%20isometric%2C%20single%20building%20centered%2C%20clean%20sketch%20lines%2C%20monochrome%2C%20no%20colour?width=640&height=640&nologo=true&seed=771204" alt="Pencil sketch brief" class="absolute inset-0 w-full h-full object-contain bg-white">
+                  <span class="absolute bottom-2 right-2 rounded-lg bg-slate-900/85 px-2.5 py-1 text-[10px] font-bold text-white">Pencil sketch</span>
                 </div>
                 <a href="grid.html" class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 no-underline">
-                  Generate Building <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
+                  Open the studio <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
                 </a>
               </div>
             </div>
@@ -554,8 +552,8 @@
           <!-- 20 Tiers -->
           <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up">
             <div class="p-6 pb-4">
-              <h3 class="text-[17px] font-semibold text-slate-900">20 plot tiers = more rent</h3>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">From survival hut to royal hyper villa. $USDCPLOT balance unlocks higher tiers.</p>
+              <h3 class="text-[17px] font-semibold text-slate-900">Briefs scale = bigger bounties</h3>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">From survival hut to royal hyper villa. Harder briefs carry bigger $USDCPLOT rewards.</p>
             </div>
             <div class="px-5 pb-5 space-y-2">
               <div class="flex items-center gap-3"><span class="w-12 shrink-0 text-[10px] text-slate-400">Tier 1</span><div class="flex-1 h-2 rounded-full bg-white overflow-hidden"><div class="h-full rounded-full bg-blue-200" style="width:5%"></div></div><span class="text-[10px] text-slate-400 w-8 text-right">Free</span></div>
@@ -570,7 +568,7 @@
           <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="80">
             <div class="p-6 pb-4">
               <h3 class="text-[17px] font-semibold text-slate-900">Live on the Shared World</h3>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">Every building renders live on the grid. Visible to every explorer instantly.</p>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">Every winning sketch lands live on the map. Visible to every explorer instantly.</p>
             </div>
             <div class="px-5 pb-5 space-y-2">
               <div class="flex items-center justify-between rounded-xl border border-blue-100 bg-white px-3.5 py-2.5">
@@ -578,11 +576,11 @@
                 <span class="font-mono text-sm font-semibold text-slate-900">10,000</span>
               </div>
               <div class="flex items-center justify-between rounded-xl border border-blue-100 bg-white px-3.5 py-2.5">
-                <span class="text-xs text-slate-500">Claimed</span>
-                <span class="font-mono text-sm font-semibold text-blue-700" id="bento-stat-claimed">...</span>
+                <span class="text-xs text-slate-500">Open bounties</span>
+                <span class="font-mono text-sm font-semibold text-amber-600" id="bento-stat-claimed">...</span>
               </div>
               <div class="flex items-center justify-between rounded-xl border border-blue-100 bg-white px-3.5 py-2.5">
-                <span class="text-xs text-slate-500">AI Buildings</span>
+                <span class="text-xs text-slate-500">Sketches built</span>
                 <span class="font-mono text-sm font-semibold text-blue-700" id="bento-stat-buildings">...</span>
               </div>
               <div class="flex items-center gap-2 pt-0.5 px-0.5">
@@ -595,8 +593,8 @@
           <!-- $USDCPLOT Balance card -->
           <div class="rounded-2xl border border-blue-200/50 overflow-hidden" style="background:#ffffff;" data-aos="fade-up" data-aos-delay="160">
             <div class="p-6 pb-4">
-              <h3 class="text-[17px] font-semibold text-slate-900">Your $USDCPLOT, your yield</h3>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">Hold $USDCPLOT to unlock higher building tiers. Connect your wallet to see what you can build.</p>
+              <h3 class="text-[17px] font-semibold text-slate-900">Your $USDCPLOT, your edge</h3>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">Hold $USDCPLOT to unlock higher-tier briefs and bigger bounties. Connect your wallet to see what you can sketch for.</p>
             </div>
             <div class="px-5 pb-5">
               <!-- Disconnected state -->
@@ -638,7 +636,7 @@
                   </div>
                 </div>
                 <a href="grid.html" class="flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity no-underline">
-                  Build Now <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
+                  Sketch Now <i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i>
                 </a>
               </div>
             </div>
@@ -654,25 +652,25 @@
         <div class="flex flex-col items-center text-center mb-14" data-aos="fade-up">
           <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Why USDC PLOT</span>
           <h2 class="font-display text-[2.1rem] font-bold tracking-tight text-slate-900 md:text-[2.6rem] max-w-2xl leading-[1.12]">
-            A landlord that<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> never sleeps</span>
+            A bounty board that<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> never sleeps</span>
           </h2>
-          <p class="mt-4 text-[15px] text-slate-500 max-w-lg leading-relaxed">No team. No mascot. Just a protocol that buys, rents, and pays out — autonomously, on-chain, in USDC.</p>
+          <p class="mt-4 text-[15px] text-slate-500 max-w-lg leading-relaxed">No team. No mascot. Just an agent posting build briefs and paying out $USDCPLOT to the best artists — autonomously, on-chain, around the clock.</p>
         </div>
         <div class="grid gap-5 md:grid-cols-3" data-aos="fade-up">
           <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
             <div class="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><i data-lucide="bot" class="h-5 w-5"></i></div>
             <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Autonomous agent</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-500">The agent acquires, builds, and leases plots around the clock with no human input — pure on-chain logic.</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-500">The agent drafts a fresh blueprint, posts the bounty, and scores the entries around the clock — no human input.</p>
           </div>
           <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
             <div class="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><i data-lucide="coins" class="h-5 w-5"></i></div>
-            <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Real USDC yield</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-500">Rent collected from every plot flows to a vault and is distributed to $USDCPLOT holders — paid in stablecoin.</p>
+            <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Real $USDCPLOT bounties</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every brief carries a posted reward. The drawing with the most votes wins the bounty — paid out automatically.</p>
           </div>
           <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
             <div class="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><i data-lucide="megaphone" class="h-5 w-5"></i></div>
             <h3 class="mt-5 text-[18px] font-semibold text-slate-900">Runs in public</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every buy, sale, and lease is auto-posted to @usdcplot, so the market plays out live for everyone.</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-500">Every new brief, submission, and winning sketch is auto-posted to @usdcplot, so the board plays out live for everyone.</p>
           </div>
         </div>
       </div>
@@ -690,35 +688,35 @@
           <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] leading-[1.13]">
             20 Tiers,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> From Hut to Hyper Villa</span>
           </h2>
-          <p class="mt-3 text-[15px] text-slate-500 max-w-md leading-relaxed">Hold more $USDCPLOT to unlock higher tier buildings. Each tier unlocks richer AI-generated architecture unique to your plot.</p>
+          <p class="mt-3 text-[15px] text-slate-500 max-w-md leading-relaxed">Every brief is a building type — from survival hut to royal hyper villa. The harder the tier, the bigger the $USDCPLOT bounty on the line.</p>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-5" data-aos="fade-up">
           <div class="rounded-2xl border border-blue-200/50 bg-white overflow-hidden shadow-sm">
-            <div class="overflow-hidden bg-blue-50" style="aspect-ratio:1/1;">
-              <img src="https://image.pollinations.ai/prompt/isometric%203d%20render%20of%20a%20small%20rustic%20wooden%20survival%20hut%20with%20a%20mossy%20shingle%20roof%20in%20a%20green%20meadow%2C%20single%20building%2C%20centered%2C%20soft%20daylight%2C%20high%20detail?width=640&height=640&nologo=true&seed=330815" alt="Tier 1 - Broken Hut" class="w-full h-full object-cover">
+            <div class="overflow-hidden bg-white" style="aspect-ratio:1/1;">
+              <img src="https://image.pollinations.ai/prompt/pencil%20sketch%20drawing%20of%20a%20small%20rustic%20wooden%20survival%20hut%20with%20a%20mossy%20shingle%20roof%2C%20hand-drawn%20graphite%20on%20white%20paper%2C%20isometric%2C%20single%20building%20centered%2C%20clean%20sketch%20lines%2C%20monochrome%2C%20no%20colour?width=640&height=640&nologo=true&seed=330815" alt="Tier 1 - Broken Hut sketch" class="w-full h-full object-contain bg-white">
             </div>
             <div class="p-5">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Tier 1</span>
-                <span class="rounded-full bg-blue-100 border border-blue-200 px-3 py-1 text-xs font-semibold text-blue-700">Free</span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Tier 1 · Easy</span>
+                <span class="rounded-full bg-blue-100 border border-blue-200 px-3 py-1 text-xs font-semibold text-blue-700">Small bounty</span>
               </div>
               <h3 class="text-base font-semibold text-slate-900">Broken Hut</h3>
-              <p class="mt-1.5 text-sm text-slate-500">The starting point for every USDC PLOT holder. Small, scrappy, and entirely yours.</p>
+              <p class="mt-1.5 text-sm text-slate-500">The easiest brief on the board — a quick sketch, a starter bounty. Perfect for your first entry.</p>
             </div>
           </div>
 
           <div class="rounded-2xl border border-blue-300/60 bg-white overflow-hidden shadow-sm ring-1 ring-blue-200/40">
-            <div class="overflow-hidden bg-blue-50" style="aspect-ratio:1/1;">
-              <img src="https://image.pollinations.ai/prompt/isometric%203d%20render%20of%20a%20luxurious%20modern%20mega%20villa%20mansion%2C%20glass%20facade%2C%20infinity%20pool%2C%20palm%20trees%2C%20a%20blue%20sports%20car%20in%20the%20driveway%2C%20bright%20clear%20day%2C%20single%20building%2C%20centered%2C%20high%20detail%2C%20vibrant?width=640&height=640&nologo=true&seed=771204" alt="Tier 20 - Royal Hyper Villa" class="w-full h-full object-cover">
+            <div class="overflow-hidden bg-white" style="aspect-ratio:1/1;">
+              <img src="https://image.pollinations.ai/prompt/pencil%20sketch%20drawing%20of%20a%20luxurious%20modern%20mega%20villa%20mansion%2C%20glass%20facade%2C%20infinity%20pool%2C%20palm%20trees%2C%20hand-drawn%20graphite%20on%20white%20paper%2C%20isometric%2C%20single%20building%20centered%2C%20clean%20sketch%20lines%2C%20monochrome%2C%20no%20colour?width=640&height=640&nologo=true&seed=771204" alt="Tier 20 - Royal Hyper Villa sketch" class="w-full h-full object-contain bg-white">
             </div>
             <div class="p-5">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-600">Tier 20</span>
-                <span class="rounded-full bg-blue-700 px-3 py-1 text-xs font-semibold text-white">15,000 $USDCPLOT</span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-600">Tier 20 · Elite</span>
+                <span class="rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">Top bounty</span>
               </div>
               <h3 class="text-base font-semibold text-slate-900">Royal Hyper Villa</h3>
-              <p class="mt-1.5 text-sm text-slate-500">Ultra-rare top-prestige architecture. Only the most dedicated $USDCPLOT holders reach Tier 20.</p>
+              <p class="mt-1.5 text-sm text-slate-500">The hardest brief and the biggest reward. Only the sharpest sketches win the Tier 20 bounty.</p>
             </div>
           </div>
         </div>
@@ -729,7 +727,7 @@
             <div class="flex-1 h-2.5 rounded-full overflow-hidden" style="background:linear-gradient(90deg,#E3EFFB,#CFE4F8 20%,#A9CFF0 40%,#6BA9E6 60%,#2775CA 80%,#0A2540)"></div>
             <span class="text-xs font-semibold text-blue-800 shrink-0">Tier 20</span>
           </div>
-          <p class="mt-2.5 text-center text-xs text-slate-400">18 more tiers between Broken Hut and Royal Hyper Villa, each unlocked by holding more $USDCPLOT</p>
+          <p class="mt-2.5 text-center text-xs text-slate-400">18 more brief tiers between Broken Hut and Royal Hyper Villa — each carrying a bigger $USDCPLOT bounty</p>
         </div>
       </div>
     </section>
@@ -741,25 +739,25 @@
         <div class="flex flex-col items-center text-center mb-12" data-aos="fade-up">
           <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">How It Works</span>
           <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] max-w-xl leading-[1.13]">
-            How rent becomes<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> your yield</span>
+            How a sketch becomes<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> a payout</span>
           </h2>
-          <p class="mt-4 text-[15px] text-slate-500 max-w-md leading-relaxed">Three steps, fully automatic. You just hold.</p>
+          <p class="mt-4 text-[15px] text-slate-500 max-w-md leading-relaxed">Three steps. Pick a brief, draw it, win the bounty.</p>
         </div>
         <div class="grid gap-4 sm:grid-cols-3" data-aos="fade-up">
           <div class="rounded-2xl border border-blue-200/60 bg-white p-6 shadow-sm">
             <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Step 01</span>
-            <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Agent leases plots</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">The agent rents its plots to AI tenants and collects rent in USDC.</p>
+            <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Agent posts a brief</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">It generates a pencil-sketch blueprint for a building and puts a $USDCPLOT bounty on the plot.</p>
           </div>
           <div class="rounded-2xl border border-blue-200/60 bg-white p-6 shadow-sm">
             <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Step 02</span>
-            <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Rent fills the vault</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">All rent flows into an on-chain vault, denominated in USDC.</p>
+            <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Artists sketch it</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">Trace or freehand the building in the studio canvas and submit your drawing to the bounty.</p>
           </div>
           <div class="rounded-2xl border border-blue-200/60 bg-white p-6 shadow-sm">
             <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">Step 03</span>
-            <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Holders earn yield</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">The vault pays out to $USDCPLOT holders, pro-rata to your balance.</p>
+            <h3 class="mt-2 text-[16px] font-semibold text-slate-900">Best drawing wins</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-500">The community votes. The top sketch wins the $USDCPLOT bounty and gets built on the plot.</p>
           </div>
         </div>
         <div class="mt-8 flex justify-center" data-aos="fade-up">
@@ -776,7 +774,7 @@
           <div data-aos="fade-up">
             <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Live agent feed</span>
             <h2 class="font-display text-[2.1rem] font-bold tracking-tight text-slate-900 md:text-[2.6rem] leading-[1.12]">It runs in public,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> 24/7</span></h2>
-            <p class="mt-4 max-w-md text-[15px] leading-relaxed text-slate-500">The agent posts every acquisition, lease, sale, and payout to <a href="https://x.com/usdcplot" target="_blank" rel="noopener" class="font-semibold text-blue-700 hover:underline">@usdcplot</a>. No roadmap theatre — just a protocol working out loud.</p>
+            <p class="mt-4 max-w-md text-[15px] leading-relaxed text-slate-500">The agent posts every new brief, submission, vote, and winning sketch to <a href="https://x.com/usdcplot" target="_blank" rel="noopener" class="font-semibold text-blue-700 hover:underline">@usdcplot</a>. No roadmap theatre — just a bounty board working out loud.</p>
             <a href="https://x.com/usdcplot" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors no-underline">Follow the agent on X <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
           </div>
           <div class="overflow-hidden rounded-2xl border border-blue-200/70 bg-white shadow-sm" data-aos="fade-up">
@@ -796,9 +794,9 @@
     <section id="tokenomics" class="border-t border-slate-900/[0.05]" style="background:rgba(235,243,253,0.88);">
       <div class="mx-auto max-w-[1100px] px-5 py-20 md:px-8 md:py-28">
         <div class="mb-12 flex flex-col items-center text-center" data-aos="fade-up">
-          <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Tokenomics &amp; yield</span>
-          <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] max-w-2xl leading-[1.13]">One token,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> one job: pay holders</span></h2>
-          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-slate-500">Fair-launched on USDC. The agent's rent is the only input; your balance is the only thing that sets your share.</p>
+          <span class="mb-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[13px] font-medium text-slate-600 shadow-sm">Tokenomics &amp; rewards</span>
+          <h2 class="font-display text-[2rem] font-bold tracking-tight text-slate-900 md:text-[2.4rem] max-w-2xl leading-[1.13]">One token,<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:#1f63ad;"> one job: fund the bounties</span></h2>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-slate-500">Fair-launched on pump.fun. Every brief is funded in $USDCPLOT; the best drawing takes the reward.</p>
         </div>
         <div class="grid gap-4 sm:grid-cols-3" data-aos="fade-up">
           <div class="rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm">
@@ -812,17 +810,17 @@
             <p class="mt-1 text-sm text-slate-500">No team allocation, no presale. Liquidity locked from day one.</p>
           </div>
           <div class="rounded-2xl border border-blue-300/70 bg-white p-7 shadow-sm ring-1 ring-blue-200/50">
-            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-600">Yield</span>
-            <p class="mt-3 font-display text-2xl font-bold text-blue-700">Rent &#8594; holders</p>
-            <p class="mt-1 text-sm text-slate-500">100% of plot rent (USDC) is distributed pro-rata to $USDCPLOT holders, on a rolling cycle.</p>
+            <span class="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-600">Rewards</span>
+            <p class="mt-3 font-display text-2xl font-bold text-blue-700">Bounties &#8594; artists</p>
+            <p class="mt-1 text-sm text-slate-500">Every brief carries a $USDCPLOT reward; the winning sketch is paid out automatically when the bounty closes.</p>
           </div>
         </div>
         <div class="mt-4 flex flex-col items-center justify-center gap-3 rounded-2xl border border-blue-200/60 bg-white p-6 text-center shadow-sm sm:flex-row sm:text-left" data-aos="fade-up">
-          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="bot" class="h-4 w-4"></i></span>Agent rents plots</div>
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="bot" class="h-4 w-4"></i></span>Agent posts brief</div>
           <i data-lucide="arrow-right" class="h-4 w-4 text-blue-400 max-sm:rotate-90"></i>
-          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="vault" class="h-4 w-4"></i></span>USDC vault fills</div>
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="pen-tool" class="h-4 w-4"></i></span>Artists sketch it</div>
           <i data-lucide="arrow-right" class="h-4 w-4 text-blue-400 max-sm:rotate-90"></i>
-          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="users" class="h-4 w-4"></i></span>Holders get paid</div>
+          <div class="flex items-center gap-2 text-sm font-semibold text-slate-700"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-50 text-blue-600"><i data-lucide="trophy" class="h-4 w-4"></i></span>Best drawing paid</div>
         </div>
       </div>
     </section>
@@ -836,17 +834,17 @@
           <div class="pointer-events-none absolute inset-0 opacity-40" style="background-image:radial-gradient(circle at 18% 55%, rgba(107,169,230,0.5) 0%, transparent 48%), radial-gradient(circle at 82% 45%, rgba(61,155,224,0.3) 0%, transparent 48%);"></div>
           <div class="relative z-10 flex flex-col items-center text-center px-6 py-16 md:py-20">
             <span class="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white/80 backdrop-blur-sm">
-              The agent is live
+              The board is live
             </span>
             <h2 class="font-display text-3xl font-bold tracking-tight text-white md:text-5xl max-w-2xl leading-[1.12]">
-              Hold $USDCPLOT. Earn the
-              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;background:linear-gradient(90deg,#e9d5ff,#A9CFF0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> agent’s rent</span>
+              Sketch the brief. Win the
+              <span style="font-family:Georgia,serif;font-style:italic;font-weight:400;background:linear-gradient(90deg,#e9d5ff,#A9CFF0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> bounty</span>
             </h2>
-            <p class="mt-5 text-base leading-relaxed text-white/65 max-w-md">The agent buys and rents plots around the clock, paying holders in USDC. Don’t watch from the sidelines.</p>
+            <p class="mt-5 text-base leading-relaxed text-white/65 max-w-md">Fresh briefs drop around the clock, each with a $USDCPLOT bounty. Grab a pencil and draw your way onto the map.</p>
             <div class="mt-8 flex flex-col items-center gap-4">
               <div class="flex flex-col sm:flex-row items-center gap-3">
                 <a href="grid.html" class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-900 shadow-lg hover:bg-white/90 transition-colors no-underline">
-                  Watch the Agent <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                  Open the bounty board <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
                 </a>
                 <a href="how-it-works.html" class="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white hover:bg-white/15 transition-colors no-underline backdrop-blur-sm">
                   Learn more
@@ -1101,27 +1099,27 @@
       } catch(_) {}
     })();
 
-    // Landing stats — read from the same local claims the grid writes
+    // Landing stats — read from the same local bounty board the grid writes
+    const BOUNTY_KEY = 'usdcplot_bounties_v2';
     function loadLandingStats() {
       try {
-        let claims = {};
-        try { claims = JSON.parse(localStorage.getItem('solplot_claims_v1')) || {}; } catch (_) {}
-        const all = Object.values(claims);
-        const claimed = all.length;
-        const withBuildings = all.filter(c => c.url).length;
-        const bentoStatClaimed = document.getElementById('bento-stat-claimed');
-        const bentoStatBuildings = document.getElementById('bento-stat-buildings');
-        const miniGridStat = document.getElementById('mini-grid-stat');
+        let store = {};
+        try { store = JSON.parse(localStorage.getItem(BOUNTY_KEY)) || {}; } catch (_) {}
+        const all = Object.entries(store).filter(([k]) => k !== '__seq').map(([, b]) => b);
+        const posted = all.length;
+        const open = all.filter(b => b.status === 'open').length;
+        const built = all.filter(b => b.status === 'built').length;
         const setTxt = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
-        if (bentoStatClaimed) bentoStatClaimed.textContent = claimed.toLocaleString();
-        if (bentoStatBuildings) bentoStatBuildings.textContent = withBuildings.toLocaleString();
-        if (miniGridStat) miniGridStat.textContent = claimed.toLocaleString() + ' claimed';
-        setTxt('stat-claimed', claimed.toLocaleString());
-        setTxt('stat-buildings', withBuildings.toLocaleString());
+        setTxt('bento-stat-claimed', open.toLocaleString());
+        setTxt('bento-stat-buildings', built.toLocaleString());
+        const miniGridStat = document.getElementById('mini-grid-stat');
+        if (miniGridStat) miniGridStat.textContent = open.toLocaleString() + ' open';
+        setTxt('stat-claimed', posted.toLocaleString());
+        setTxt('stat-buildings', built.toLocaleString());
       } catch (_) {}
     }
     loadLandingStats();
-    window.addEventListener('storage', (e) => { if (e.key === 'solplot_claims_v1') loadLandingStats(); });
+    window.addEventListener('storage', (e) => { if (e.key === BOUNTY_KEY) loadLandingStats(); });
     window.addEventListener('focus', loadLandingStats);
 
     // Section animation polish
@@ -1185,24 +1183,27 @@
       if (!feed) return;
       const cols = 'ABCDEFGHJKLMNPQRST'.split('');
       const tiers = ['Wooden Cottage','Comfort Villa','Elite Residence','Beachfront Villa','Mega Mansion','Royal Hyper Villa'];
+      const artists = ['pixel.sol','ArchMaxi','0xDoodle','plotpainter','frenbuilder','sketch_degen','blueprintbob','crayon_chad'];
       const rnd = (a,b) => Math.floor(a + Math.random()*(b-a+1));
       const pick = (a) => a[Math.floor(Math.random()*a.length)];
-      const pad = (n) => n<10 ? '0'+n : ''+n;
       const plot = () => pick(cols)+rnd(1,99);
+      const reward = () => rnd(24,420)+'k $USDCPLOT';
+      const A = '<b class="text-blue-700">agent</b>';
+      const who = () => '<b class="text-blue-700">'+pick(artists)+'</b>';
       const actions = [
-        () => ['\uD83D\uDCE5','acquired', plot()+' for '+rnd(4,18)+'.'+pad(rnd(0,99))+' USDC'],
-        () => ['\uD83D\uDD11','leased', plot()+' ('+pick(tiers)+') \u2192 +'+rnd(6,40)+'.'+pad(rnd(0,99))+' USDC/cycle'],
-        () => ['\uD83C\uDFD7\uFE0F','built', 'an AI '+pick(tiers)+' on '+plot()],
-        () => ['\uD83D\uDCC8','sold', plot()+' for '+rnd(20,140)+' USDC ('+rnd(8,60)+'% gain)'],
-        () => ['\uD83D\uDCB8','distributed', rnd(200,4200).toLocaleString()+' USDC to '+rnd(300,1800).toLocaleString()+' holders'],
+        () => ['\uD83D\uDCDC', A+' posted a brief \u2014 <span class="text-slate-800">'+pick(tiers)+' on '+plot()+', '+reward()+' bounty</span>'],
+        () => ['\u270F\uFE0F', who()+' submitted a sketch on <span class="text-slate-800">'+plot()+'</span>'],
+        () => ['\u25B2', 'votes flowing to a <span class="text-slate-800">'+pick(tiers)+'</span> sketch on '+plot()],
+        () => ['\uD83C\uDFC6', who()+' won the bounty on <span class="text-slate-800">'+plot()+' \u2014 '+reward()+'</span>'],
+        () => ['\uD83C\uDFD7\uFE0F', A+' built the winning sketch on <span class="text-slate-800">'+plot()+'</span>'],
       ];
       function add(initial){
-        const [emoji,verb,rest] = pick(actions)();
+        const [emoji,html] = pick(actions)();
         const row = document.createElement('div');
         row.className = 'flex items-start gap-2.5 px-4 py-3 border-b border-blue-50';
         if(!initial) row.style.animation = 'up .45s ease-out';
         row.innerHTML = '<span class="shrink-0">'+emoji+'</span>'
-          + '<span class="flex-1 leading-snug text-slate-600"><b class="text-blue-700">agent</b> '+verb+' <span class="text-slate-800">'+rest+'</span></span>'
+          + '<span class="flex-1 leading-snug text-slate-600">'+html+'</span>'
           + '<span class="shrink-0 text-[10px] text-slate-400">now</span>';
         // age existing timestamps
         feed.querySelectorAll('span.shrink-0.text-\\[10px\\]').forEach((t,i)=>{});
