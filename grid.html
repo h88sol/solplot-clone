@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" class="min-h-full" style="background-color:#F0F6FE;">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USDC PLOT — World Grid</title>
+  <meta name="description" content="Claim a tile, pick a house type, generate an AI building, and place it on your plot." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    h1,h2,h3,.brand{font-family:'Space Grotesk','Inter',system-ui,sans-serif}
+    :root{
+      --usdc:#2775CA; --usdc-2:#6BA9E6; --usdc-50:#E3EFFB;
+      --bg:#EEF4FD; --ink:#0f172a;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{background:#F0F6FE;color-scheme:light}
+    body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+    /* ----- GRID ----- */
+    #grid-scroll{
+      overflow:auto; border-radius:16px; background:#cbdcef;
+      border:1px solid rgba(39,117,202,.28);
+      box-shadow:0 10px 40px rgba(10,52,100,.10);
+      scrollbar-width:thin; scrollbar-color:rgba(39,117,202,.35) transparent;
+    }
+    #grid{
+      display:grid;
+      grid-template-columns:repeat(var(--cols),var(--tile));
+      grid-auto-rows:var(--tile);
+      gap:1px; background:#bcd2e9;        /* visible gridlines */
+      width:max-content;
+    }
+    .tile{
+      width:var(--tile); height:var(--tile);
+      background:#ffffff; border:0; padding:0; cursor:pointer;
+      background-size:cover; background-position:center;
+      transition:outline .08s, background-color .1s;
+      position:relative;
+    }
+    .tile:hover{outline:2px solid var(--usdc);outline-offset:-1px;z-index:3;background-color:#e6f0fb}
+    .tile.claimed{background-color:var(--usdc-50)}
+    .tile.mine{outline:2px solid #22c55e;outline-offset:-1px;z-index:2}
+
+    .purple-cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;cursor:pointer;
+      border-radius:.6rem;border:1px solid rgba(255,255,255,.25);color:#fff;
+      background:linear-gradient(165deg,rgba(39,117,202,.95),rgba(20,70,130,.96));
+      box-shadow:0 6px 24px rgba(20,70,130,.35),inset 0 1px 0 rgba(255,255,255,.3);
+      transition:filter .15s}
+    .purple-cta:hover{filter:brightness(1.06)}
+    .purple-cta:disabled{opacity:.5;cursor:not-allowed;filter:none}
+
+    /* spinner */
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spin{animation:spin .9s linear infinite}
+    @keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+    .tile.pop{animation:pop .42s ease-out;z-index:4}
+
+    /* toast */
+    #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120%);
+      transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:100}
+    #toast.show{transform:translateX(-50%) translateY(0)}
+
+    /* embed mode: hide chrome when inside an iframe */
+    body.embed #site-header,body.embed #toolbar,body.embed #legend,body.embed footer{display:none!important}
+    body.embed{background:transparent}
+    body.embed #grid-wrap{padding:0}
+    body.embed #grid-scroll{border:0;box-shadow:none;border-radius:0;height:100vh}
+
+    .modal-backdrop{background:rgba(8,37,64,.35);backdrop-filter:blur(6px)}
+  </style>
+</head>
+<body class="min-h-dvh">
+
+  <!-- ============ HEADER ============ -->
+  <header id="site-header" class="fixed top-0 inset-x-0 z-[60] px-5 py-4 md:px-8">
+    <div class="mx-auto max-w-[1280px] flex items-center justify-between rounded-2xl border border-white/60 bg-white/40 px-4 py-2.5 backdrop-blur-2xl"
+         style="box-shadow:0 4px 30px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.6);">
+      <a href="index.html" class="inline-flex items-center gap-2">
+        <img src="favicon.svg" class="h-[26px] w-[26px] object-contain" alt="" />
+        <span class="brand font-bold tracking-tight text-[#111] text-lg">USDC PLOT</span>
+        <span class="ml-1.5 rounded-full bg-blue-100 border border-blue-200 px-2 py-0.5 text-[10px] font-semibold text-blue-700">World Grid</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white/70 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-white transition">
+          <i data-lucide="arrow-left" class="h-4 w-4"></i> Home
+        </a>
+        <a href="https://x.com/usdcplot" target="_blank" rel="noopener" aria-label="Follow on X" class="grid h-[38px] w-[38px] place-items-center rounded-lg border border-blue-200 bg-white text-slate-700 hover:bg-blue-50 transition-colors"><svg viewBox="0 0 24 24" class="h-[15px] w-[15px]" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <button id="connect-btn" onclick="connectPhantom()" class="purple-cta h-[38px] min-w-[150px] px-4 text-[15px] font-medium">
+          <img src="https://cdn.brandfetch.io/idf5VaJxyT/theme/light/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" class="h-[18px] w-[18px] brightness-0 invert" alt="" />
+          <span id="connect-text">Connect Phantom</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main id="grid-wrap" class="mx-auto max-w-[1280px] px-4 pt-28 pb-16 md:px-8">
+
+    <!-- toolbar -->
+    <div id="toolbar" class="mb-4 flex flex-wrap items-center gap-3">
+      <div class="flex items-center gap-2 rounded-xl border border-blue-200/60 bg-white px-4 py-2.5 shadow-sm">
+        <span class="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
+        <span class="text-sm font-semibold text-slate-700">Live World Grid</span>
+        <span class="text-xs text-slate-400">· 100×100 · 10,000 plots</span>
+      </div>
+      <div class="flex items-center gap-4 rounded-xl border border-blue-200/60 bg-white px-4 py-2.5 shadow-sm text-sm">
+        <span class="text-slate-500">Claimed <b id="stat-claimed" class="font-mono text-blue-700">0</b></span>
+        <span class="text-slate-500">Your plots <b id="stat-mine" class="font-mono text-emerald-600">0</b></span>
+      </div>
+      <div class="ml-auto flex items-center gap-2 rounded-xl border border-blue-200/60 bg-white px-4 py-2.5 shadow-sm">
+        <i data-lucide="zoom-out" class="h-4 w-4 text-slate-400"></i>
+        <input id="zoom" type="range" min="10" max="36" value="18" class="w-28 accent-blue-600" />
+        <i data-lucide="zoom-in" class="h-4 w-4 text-slate-400"></i>
+      </div>
+    </div>
+
+    <p class="mb-3 text-sm text-slate-500">Click any empty tile to claim it, choose a house type, and generate your AI building. Click your buildings to view them.</p>
+
+    <!-- grid -->
+    <div id="grid-scroll" style="height:min(70vh,720px)">
+      <div id="grid" style="--cols:100;--tile:18px"></div>
+    </div>
+
+    <!-- legend -->
+    <div id="legend" class="mt-4 flex flex-wrap items-center gap-5 text-xs text-slate-500">
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#ffffff;border:1px solid #bcd2e9"></i> Empty</span>
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="background:#6BA9E6"></i> Claimed building</span>
+      <span class="inline-flex items-center gap-1.5"><i class="h-3 w-3 rounded-sm" style="outline:2px solid #22c55e;outline-offset:-1px;background:#E3EFFB"></i> Your plot</span>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-900/[0.05] py-8 text-center text-xs text-slate-400">
+    USDC PLOT · AI virtual real estate on USDC · buildings generated with AI, stored on your device for this demo
+  </footer>
+
+  <!-- ============ CLAIM MODAL ============ -->
+  <div id="modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+    <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
+    <div class="relative w-full max-w-lg rounded-3xl border border-blue-200 bg-white shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+      <!-- header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-blue-100">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-400">Claim Plot</p>
+          <h2 id="modal-coord" class="text-lg font-bold text-slate-900">Plot (0, 0)</h2>
+        </div>
+        <button onclick="closeModal()" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100"><i data-lucide="x" class="h-5 w-5"></i></button>
+      </div>
+
+      <div class="overflow-y-auto px-6 py-5 space-y-5">
+        <!-- house type -->
+        <div>
+          <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">House Type</label>
+          <select id="house-type" class="mt-2 w-full rounded-xl border border-blue-200 bg-[#F0F6FE] px-3 py-2.5 text-sm font-medium text-slate-800 focus:border-blue-500 focus:outline-none"></select>
+        </div>
+
+        <!-- style chips -->
+        <div>
+          <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Style</label>
+          <div id="style-chips" class="mt-2 flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- custom prompt -->
+        <div>
+          <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Custom Prompt <span class="font-normal normal-case text-slate-300">(optional)</span></label>
+          <input id="prompt" type="text" placeholder="add a luxury car and graffiti pumper"
+                 class="mt-2 w-full rounded-xl border border-blue-200 bg-[#F0F6FE] px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none" />
+        </div>
+
+        <!-- preview -->
+        <div>
+          <label class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Preview</label>
+          <div id="preview" class="mt-2 relative aspect-square w-full overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-sky-50 grid place-items-center">
+            <div id="preview-empty" class="text-center px-6">
+              <i data-lucide="image" class="mx-auto h-9 w-9 text-blue-300"></i>
+              <p class="mt-2 text-xs text-slate-400">Pick a type and hit Generate to render your AI building.</p>
+            </div>
+            <div id="preview-loading" class="hidden text-center">
+              <i data-lucide="loader-2" class="mx-auto h-9 w-9 text-blue-500 spin"></i>
+              <p class="mt-2 text-xs text-slate-500">Generating your building…</p>
+              <p class="text-[10px] text-slate-400">this can take ~10–20s</p>
+            </div>
+            <img id="preview-img" class="hidden absolute inset-0 h-full w-full object-cover" alt="Generated building" />
+            <span id="preview-badge" class="hidden absolute bottom-2 right-2 rounded-lg bg-blue-700/90 px-2.5 py-1 text-[10px] font-bold text-white">AI Generated</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- footer actions -->
+      <div class="flex items-center gap-3 border-t border-blue-100 px-6 py-4">
+        <button id="gen-btn" onclick="generate()" class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border border-blue-300 bg-blue-50 px-4 py-2.5 text-sm font-semibold text-blue-700 hover:bg-blue-100 transition">
+          <i data-lucide="sparkles" class="h-4 w-4"></i> <span id="gen-label">Generate</span>
+        </button>
+        <button id="claim-btn" onclick="claim()" disabled class="purple-cta flex-1 px-4 py-2.5 text-sm font-semibold">
+          <i data-lucide="check" class="h-4 w-4"></i> Place on my plot
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DETAIL POPOVER ============ -->
+  <div id="detail" class="fixed inset-0 z-[120] hidden items-center justify-center p-4">
+    <div class="modal-backdrop absolute inset-0" onclick="closeDetail()"></div>
+    <div class="relative w-full max-w-sm rounded-3xl border border-blue-200 bg-white shadow-2xl overflow-hidden">
+      <div class="aspect-square w-full bg-blue-50"><img id="detail-img" class="h-full w-full object-cover" alt=""/></div>
+      <div class="p-5">
+        <div class="flex items-center justify-between">
+          <h3 id="detail-name" class="text-base font-bold text-slate-900">Building</h3>
+          <span id="detail-tier" class="rounded-full bg-blue-100 border border-blue-200 px-2.5 py-0.5 text-[11px] font-semibold text-blue-700">Tier 1</span>
+        </div>
+        <p id="detail-coord" class="mt-0.5 text-xs text-slate-400 font-mono">Plot (0,0)</p>
+        <p id="detail-prompt" class="mt-3 text-sm text-slate-600 italic"></p>
+        <p id="detail-owner" class="mt-3 text-[11px] text-slate-400 font-mono"></p>
+        <button onclick="closeDetail()" class="mt-4 w-full rounded-xl border border-slate-200 bg-white py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- toast -->
+  <div id="toast" class="rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-lg"></div>
+
+  <script>
+  /* ───────────────── config ───────────────── */
+  const GRID_N = 100;
+  const STORE_KEY = 'solplot_claims_v1';
+
+  const HOUSE_TIERS = [
+    {id:1,name:"Broken Hut",min:0,base:"a tiny broken wooden survival hut, ramshackle"},
+    {id:2,name:"Rusty Shack",min:100,base:"a small rusty metal shack"},
+    {id:3,name:"Basic Hut",min:200,base:"a basic wooden hut with a thatched roof"},
+    {id:4,name:"Poor Cottage",min:300,base:"a poor little cottage"},
+    {id:5,name:"Starter Cabin",min:400,base:"a cozy wooden starter cabin"},
+    {id:6,name:"Wooden Cottage",min:600,base:"a charming wooden cottage with a garden"},
+    {id:7,name:"Suburban Shack House",min:800,base:"a modest suburban house"},
+    {id:8,name:"Small Family Home",min:1000,base:"a small modern family home"},
+    {id:9,name:"Modest Bungalow",min:1300,base:"a modest single-storey bungalow"},
+    {id:10,name:"Urban Starter House",min:1600,base:"an urban two-storey starter house"},
+    {id:11,name:"Modern Townhouse",min:2000,base:"a sleek modern townhouse"},
+    {id:12,name:"Comfort Villa",min:2500,base:"a comfortable suburban villa with a small pool"},
+    {id:13,name:"Luxury Apartment House",min:3200,base:"a luxury apartment building, glass balconies"},
+    {id:14,name:"High-End Family Villa",min:4000,base:"a high-end modern family villa, large windows"},
+    {id:15,name:"Elite Residence",min:5000,base:"an elite modern residence with landscaped garden"},
+    {id:16,name:"Luxury Mansion",min:6500,base:"a luxury mansion with columns and a fountain"},
+    {id:17,name:"Beachfront Villa",min:8000,base:"a beachfront villa with infinity pool, palm trees"},
+    {id:18,name:"Mountain Estate",min:9500,base:"a grand mountain estate, stone and timber"},
+    {id:19,name:"Mega Mansion Compound",min:12000,base:"a sprawling mega mansion compound, multiple wings"},
+    {id:20,name:"Royal Hyper Villa",min:15000,base:"an ultra-luxurious royal hyper villa palace, gold accents, supercars"},
+  ];
+  const STYLES = ["Modern","Classic","Futuristic","Cyberpunk","Cozy","Fantasy"];
+
+  /* ───────────────── state ───────────────── */
+  let claims = loadClaims();
+  let owner = null;            // phantom address (short) or null
+  let selectedKey = null;      // "x,y" currently being claimed
+  let selectedStyle = "Modern";
+  let lastGenUrl = null;       // preview image url ready to commit
+
+  function loadClaims(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch{ return {}; } }
+  function saveClaims(){ localStorage.setItem(STORE_KEY, JSON.stringify(claims)); }
+  function keyToXY(k){ const [x,y]=k.split(',').map(Number); return {x,y}; }
+  function tierById(id){ return HOUSE_TIERS.find(t=>t.id===id) || HOUSE_TIERS[0]; }
+
+  /* ───────────────── grid render ───────────────── */
+  const gridEl = document.getElementById('grid');
+  function buildGrid(){
+    const tiles = new Array(GRID_N*GRID_N);
+    for(let y=0;y<GRID_N;y++){
+      for(let x=0;x<GRID_N;x++){
+        const k = x+','+y;
+        const c = claims[k];
+        let cls = 'tile';
+        let style = '';
+        if(c){
+          cls += ' claimed';
+          if(owner && c.owner===owner) cls += ' mine';
+          style = `background-image:url('${c.url}')`;
+        }
+        tiles[y*GRID_N+x] = `<button class="${cls}" data-k="${k}" style="${style}" title="Plot (${x}, ${y})"></button>`;
+      }
+    }
+    gridEl.innerHTML = tiles.join('');
+  }
+
+  function updateTile(k){
+    const el = gridEl.querySelector(`[data-k="${k}"]`);
+    if(!el) return;
+    const c = claims[k];
+    el.className = 'tile' + (c ? ' claimed' : '') + (c && owner && c.owner===owner ? ' mine' : '');
+    el.style.backgroundImage = c ? `url('${c.url}')` : '';
+    if(c){ el.classList.add('pop'); setTimeout(()=>el.classList.remove('pop'), 460); }
+  }
+
+  function refreshStats(){
+    const all = Object.values(claims);
+    document.getElementById('stat-claimed').textContent = all.length.toLocaleString();
+    document.getElementById('stat-mine').textContent = owner ? all.filter(c=>c.owner===owner).length : 0;
+  }
+
+  /* click delegation */
+  gridEl.addEventListener('click', e=>{
+    const t = e.target.closest('.tile'); if(!t) return;
+    const k = t.dataset.k;
+    if(claims[k]) openDetail(k); else openModal(k);
+  });
+
+  /* zoom */
+  document.getElementById('zoom').addEventListener('input', e=>{
+    gridEl.style.setProperty('--tile', e.target.value+'px');
+  });
+
+  /* ───────────────── claim modal ───────────────── */
+  const modal = document.getElementById('modal');
+  function openModal(k){
+    selectedKey = k; lastGenUrl=null; selectedStyle="Modern";
+    const {x,y}=keyToXY(k);
+    document.getElementById('modal-coord').textContent = `Plot (${x}, ${y})`;
+    // reset preview
+    document.getElementById('preview-img').classList.add('hidden');
+    document.getElementById('preview-badge').classList.add('hidden');
+    document.getElementById('preview-loading').classList.add('hidden');
+    document.getElementById('preview-empty').classList.remove('hidden');
+    document.getElementById('claim-btn').disabled = true;
+    document.getElementById('gen-label').textContent = 'Generate';
+    document.getElementById('prompt').value='';
+    renderStyleChips();
+    modal.classList.remove('hidden'); modal.classList.add('flex');
+    lucide.createIcons();
+  }
+  function closeModal(){ modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+  function renderStyleChips(){
+    const wrap = document.getElementById('style-chips');
+    wrap.innerHTML = STYLES.map(s=>{
+      const on = s===selectedStyle;
+      return `<button type="button" data-style="${s}" class="rounded-full border px-3 py-1 text-xs font-medium transition ${on?'border-blue-500 bg-blue-600 text-white':'border-blue-200 bg-white text-slate-600 hover:bg-blue-50'}">${s}</button>`;
+    }).join('');
+    wrap.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{ selectedStyle=b.dataset.style; renderStyleChips(); });
+  }
+
+  /* populate house type select */
+  (function(){
+    const sel = document.getElementById('house-type');
+    sel.innerHTML = HOUSE_TIERS.map(t=>`<option value="${t.id}">Tier ${t.id} — ${t.name}${t.min?` · ${t.min.toLocaleString()} $USDCPLOT`:' · Free'}</option>`).join('');
+    sel.value = '12';
+  })();
+
+  /* ───────────────── AI generation (Pollinations, free, no key) ───────────────── */
+  function buildPrompt(){
+    const tier = tierById(Number(document.getElementById('house-type').value));
+    const custom = document.getElementById('prompt').value.trim();
+    let p = `isometric 3D render of ${tier.base}, ${selectedStyle.toLowerCase()} style`;
+    if(custom) p += `, ${custom}`;
+    p += `, single building, centered, video game asset, clean soft background, high detail, vibrant`;
+    return p;
+  }
+
+  function generate(){
+    const tier = tierById(Number(document.getElementById('house-type').value));
+    const prompt = buildPrompt();
+    const seed = Math.floor(Math.random()*1e7);
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=640&height=640&nologo=true&seed=${seed}`;
+
+    // UI: loading
+    document.getElementById('preview-empty').classList.add('hidden');
+    document.getElementById('preview-img').classList.add('hidden');
+    document.getElementById('preview-badge').classList.add('hidden');
+    document.getElementById('preview-loading').classList.remove('hidden');
+    document.getElementById('gen-btn').setAttribute('disabled','');
+    document.getElementById('claim-btn').disabled = true;
+    lucide.createIcons();
+
+    const img = new Image();
+    img.onload = ()=>{
+      lastGenUrl = url;
+      const pv = document.getElementById('preview-img');
+      pv.src = url; pv.classList.remove('hidden');
+      document.getElementById('preview-badge').classList.remove('hidden');
+      document.getElementById('preview-loading').classList.add('hidden');
+      document.getElementById('gen-btn').removeAttribute('disabled');
+      document.getElementById('gen-label').textContent = 'Regenerate';
+      document.getElementById('claim-btn').disabled = false;
+      lucide.createIcons();
+    };
+    img.onerror = ()=>{
+      document.getElementById('preview-loading').classList.add('hidden');
+      document.getElementById('preview-empty').classList.remove('hidden');
+      document.getElementById('gen-btn').removeAttribute('disabled');
+      toast('Generation failed — try again');
+    };
+    img.src = url;
+  }
+
+  /* ───────────────── commit claim ───────────────── */
+  function claim(){
+    if(!selectedKey || !lastGenUrl) return;
+    const tier = tierById(Number(document.getElementById('house-type').value));
+    claims[selectedKey] = {
+      tier: tier.id, name: tier.name, style: selectedStyle,
+      prompt: document.getElementById('prompt').value.trim(),
+      url: lastGenUrl, owner: owner || 'guest', ts: Date.now()
+    };
+    saveClaims();
+    updateTile(selectedKey);
+    refreshStats();
+    closeModal();
+    const {x,y}=keyToXY(selectedKey);
+    toast(`🏠 ${tier.name} placed on plot (${x}, ${y})`);
+    // nudge the tile into view if needed
+    gridEl.querySelector(`[data-k="${selectedKey}"]`)?.scrollIntoView({block:'center',inline:'center',behavior:'smooth'});
+  }
+
+  /* ───────────────── detail popover ───────────────── */
+  function openDetail(k){
+    const c = claims[k]; if(!c) return;
+    const {x,y}=keyToXY(k);
+    document.getElementById('detail-img').src = c.url;
+    document.getElementById('detail-name').textContent = c.name;
+    document.getElementById('detail-tier').textContent = 'Tier '+c.tier;
+    document.getElementById('detail-coord').textContent = `Plot (${x}, ${y}) · ${c.style||''}`;
+    document.getElementById('detail-prompt').textContent = c.prompt ? `“${c.prompt}”` : '';
+    document.getElementById('detail-owner').textContent = 'Owner: '+(c.owner||'guest');
+    const d=document.getElementById('detail'); d.classList.remove('hidden'); d.classList.add('flex');
+    lucide.createIcons();
+  }
+  function closeDetail(){ const d=document.getElementById('detail'); d.classList.add('hidden'); d.classList.remove('flex'); }
+
+  /* ───────────────── toast ───────────────── */
+  let toastTimer;
+  function toast(msg){
+    const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+  }
+
+  /* ───────────────── Phantom (optional owner tag) ───────────────── */
+  async function connectPhantom(){
+    const ph = window.phantom?.solana ?? window.solana;
+    if(!ph?.isPhantom){ window.open('https://phantom.app/','_blank'); return; }
+    try{
+      const resp = await ph.connect();
+      const addr = resp.publicKey.toString();
+      owner = addr.slice(0,4)+'...'+addr.slice(-4);
+      document.getElementById('connect-text').textContent = owner;
+      buildGrid(); refreshStats();
+      toast('Wallet connected · claims will be tagged to '+owner);
+    }catch(e){}
+  }
+  (async()=>{ try{ const ph=window.phantom?.solana??window.solana; if(ph?.isConnected&&ph.publicKey){ const a=ph.publicKey.toString(); owner=a.slice(0,4)+'...'+a.slice(-4); document.getElementById('connect-text').textContent=owner; } }catch{} })();
+
+  /* ───────────────── boot ───────────────── */
+  if(window.self !== window.top) document.body.classList.add('embed'); // embed mode in iframe
+  // keep grid in sync if claimed in another tab/the embedded iframe
+  window.addEventListener('storage', e=>{ if(e.key===STORE_KEY){ claims=loadClaims(); buildGrid(); refreshStats(); }});
+  buildGrid();
+  refreshStats();
+  lucide.createIcons();
+  </script>
+</body>
+</html>
