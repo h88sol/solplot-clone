@@ -190,7 +190,7 @@
               <p id="brief-desc" class="mt-1 text-xs text-stone-500 leading-relaxed"></p>
               <div class="mt-2 flex flex-wrap gap-2 text-[11px]">
                 <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-stone-600"><i data-lucide="gauge" class="h-3 w-3"></i> <span id="brief-diff">Medium</span></span>
-                <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-amber-700"><i data-lucide="users" class="h-3 w-3"></i> <span id="brief-subs">0</span> submissions</span>
+                <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-amber-700"><i data-lucide="coins" class="h-3 w-3"></i> 2 SOL reward</span>
                 <span class="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2 py-0.5 text-stone-600"><i data-lucide="clock" class="h-3 w-3"></i> live now</span>
               </div>
             </div>
@@ -217,13 +217,10 @@
           </div>
         </div>
 
-        <!-- LEADERBOARD -->
+        <!-- HOW TO ENTER -->
         <div class="mt-7 border-t border-amber-100 pt-5">
-          <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-stone-900 inline-flex items-center gap-2"><i data-lucide="trophy" class="h-4 w-4 text-amber-500"></i> Submissions &amp; votes</h3>
-            <span class="text-[11px] text-stone-400">Most votes wins when the bounty closes</span>
-          </div>
-          <div id="leaderboard" class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
+          <h3 class="text-sm font-bold text-stone-900 inline-flex items-center gap-2"><i data-lucide="trophy" class="h-4 w-4 text-amber-500"></i> Enter this bounty</h3>
+          <p class="mt-2 text-sm text-stone-600 leading-relaxed">Sketch the brief — on this canvas or on real paper — then post it on X and tag <a href="https://x.com/sketchbounties" target="_blank" rel="noopener" class="font-semibold text-amber-700 hover:underline">@sketchbounties</a> with this plot. The best drawing wins the <b>2 SOL</b> bounty.</p>
         </div>
       </div>
     </div>
@@ -297,18 +294,11 @@
   function makeBounty(k){
     const b = pick(BUILDINGS), style = pick(STYLES), extra = pick(EXTRAS);
     const seed = rnd(1,9999999);
-    const range = {Easy:[0.4,1.8],Medium:[1.5,4.5],Hard:[3,9],Elite:[8,24]}[b.diff];
-    const reward = +(range[0] + Math.random()*(range[1]-range[0])).toFixed(1);   // SOL
-    // seed 1-3 rival submissions (same building, different hand) so "best wins" is competitive
-    const rivalCount = rnd(1,3);
-    const subs = pickN(RIVALS, rivalCount).map((name,i)=>({
-      id:'r'+seed+'_'+i, artist:name, mine:false,
-      hand: seed + 137*(i+1), votes: rnd(2,34), ts: Date.now()-rnd(1,80)*60000
-    }));
+    const reward = 2;   // every bounty pays a flat 2 SOL
     return {
       id: seq++, x:keyToXY(k).x, y:keyToXY(k).y,
       base:b.base, name:b.name, diff:b.diff, style, extra, seed, reward,
-      status:'open', winner:null, builtImg:null, subs, voted:[]
+      status:'open', winner:null, builtImg:null, subs:[], voted:[]   // no fake submissions / votes
     };
   }
 
@@ -379,44 +369,10 @@
     bi.onload=()=>{ bi.classList.remove('hidden'); bl.classList.add('hidden'); };
     bi.src=briefImg(b);
     clearDraw(true);
-    renderLeaderboard();
     modal.classList.remove('hidden'); modal.classList.add('flex');
     lucide.createIcons();
   }
   function closeModal(){ modal.classList.add('hidden'); modal.classList.remove('flex'); cur=null; }
-
-  function renderLeaderboard(){
-    const b=store[cur]; const lb=document.getElementById('leaderboard');
-    document.getElementById('brief-subs').textContent=b.subs.length;
-    const sorted=[...b.subs].sort((p,q)=>q.votes-p.votes);
-    const top=sorted[0];
-    lb.innerHTML = sorted.map((s)=>{
-      const lead = top && s.id===top.id && b.subs.length>0;
-      const voted = b.voted.includes(s.id);
-      const img = s.img || rivalImg(b, s.hand);
-      return `<div class="rounded-2xl border ${lead?'border-amber-300 ring-1 ring-amber-200':'border-amber-100'} bg-white overflow-hidden">
-        <div class="relative aspect-square bg-white">
-          <img src="${img}" class="h-full w-full object-contain bg-white" alt=""/>
-          ${lead?'<span class="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5z"/></svg>Leading</span>':''}
-          ${s.mine?'<span class="absolute top-2 right-2 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-bold text-white">You</span>':''}
-        </div>
-        <div class="flex items-center justify-between px-3 py-2">
-          <span class="truncate text-xs font-semibold text-stone-700">${s.artist}</span>
-          <button onclick="vote('${s.id}')" ${voted?'disabled':''} class="vote-btn inline-flex items-center gap-1 rounded-lg border border-amber-200 bg-amber-50 px-2 py-1 text-[11px] font-semibold text-amber-700 hover:bg-amber-100">
-            <i data-lucide="arrow-big-up" class="h-3.5 w-3.5"></i> ${s.votes}
-          </button>
-        </div>
-      </div>`;
-    }).join('') || '<p class="col-span-full text-center text-xs text-stone-400 py-6">No submissions yet.</p>';
-    lucide.createIcons();
-  }
-
-  function vote(id){
-    const b=store[cur]; if(b.voted.includes(id)) return;
-    const s=b.subs.find(x=>x.id===id); if(!s) return;
-    s.votes++; b.voted.push(id); saveStore(); renderLeaderboard();
-    toast('▲ Vote counted');
-  }
 
   /* ───────────────── drawing canvas (draw here, or on paper) ───────────────── */
   const canvas=document.getElementById('canvas');
@@ -502,16 +458,16 @@
 
   /* ───────────────── boot ───────────────── */
   if(window.self!==window.top) document.body.classList.add('embed');
-  // crowning was removed — clear any previously-crowned/built tiles back to open bounties
-  (function cleanupBuilt(){
+  // normalise any older saved bounties: open only, flat 2 SOL, no fake submissions/votes
+  (function cleanup(){
     let dirty=false;
     for(const [,b] of bounties()){
-      if(b.status && b.status!=='open'){
-        b.status='open';
+      if(b.status && b.status!=='open'){ b.status='open';
         delete b.builtImg; delete b.winner; delete b.winnerArtist;
-        delete b.winnerSketch; delete b.winnerVotes; delete b.winnerOwner;
-        dirty=true;
-      }
+        delete b.winnerSketch; delete b.winnerVotes; delete b.winnerOwner; dirty=true; }
+      if(b.reward!==2){ b.reward=2; dirty=true; }
+      if(b.subs && b.subs.length){ b.subs=[]; dirty=true; }
+      if(b.voted && b.voted.length){ b.voted=[]; dirty=true; }
     }
     if(dirty) saveStore();
   })();

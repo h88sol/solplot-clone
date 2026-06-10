@@ -522,7 +522,7 @@
                     <span class="h-2 w-2 rounded-full bg-amber-500 shrink-0"></span>
                     <span class="text-[12px] font-semibold text-amber-900">Beachfront Villa · Modern</span>
                   </div>
-                  <span class="rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-bold text-white shrink-0">6.4 SOL</span>
+                  <span class="rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-bold text-white shrink-0">2 SOL</span>
                 </div>
                 <!-- Brief note -->
                 <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400 mb-2">The Brief</p>
@@ -1059,18 +1059,12 @@
       if (!feed) return;
       const cols = 'ABCDEFGHJKLMNPQRST'.split('');
       const tiers = ['Wooden Cottage','Comfort Villa','Elite Residence','Beachfront Villa','Mega Mansion','Royal Hyper Villa'];
-      const artists = ['pixel.sol','ArchMaxi','0xDoodle','plotpainter','frenbuilder','sketch_degen','blueprintbob','crayon_chad'];
       const rnd = (a,b) => Math.floor(a + Math.random()*(b-a+1));
       const pick = (a) => a[Math.floor(Math.random()*a.length)];
       const plot = () => pick(cols)+rnd(1,99);
-      const reward = () => (rnd(3,220)/10).toFixed(1)+' SOL';
-      const who = () => '<b class="text-amber-700">'+pick(artists)+'</b>';
+      // only neutral "new brief" events \u2014 no fake submissions / votes / wins
       const actions = [
-        () => ['\uD83D\uDCDC', '<b class="text-amber-700">New brief</b> \u2014 <span class="text-slate-800">'+pick(tiers)+' on '+plot()+', '+reward()+' bounty</span>'],
-        () => ['\u270F\uFE0F', who()+' submitted a sketch on <span class="text-slate-800">'+plot()+'</span>'],
-        () => ['\u25B2', 'votes flowing to a <span class="text-slate-800">'+pick(tiers)+'</span> sketch on '+plot()],
-        () => ['\uD83C\uDFC6', who()+' won the bounty on <span class="text-slate-800">'+plot()+' \u2014 '+reward()+'</span>'],
-        () => ['\uD83C\uDFD7\uFE0F', '<b class="text-amber-700">Winning sketch</b> built on <span class="text-slate-800">'+plot()+'</span>'],
+        () => ['\uD83D\uDCDC', '<b class="text-amber-700">New brief</b> \u2014 <span class="text-slate-800">'+pick(tiers)+' on '+plot()+', 2 SOL bounty</span>'],
       ];
       function add(initial){
         const [emoji,html] = pick(actions)();
